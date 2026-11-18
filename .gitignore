@@ -1,0 +1,19 @@
+# planning notes stay out of the repository
+PROJECT_PLAN.md
+Information.pdf
+*.pdf.bak
+
+# secrets
+.env
+.env.*
+
+# build output
+backend/target/
+frontend/node_modules/
+frontend/dist/
+
+# editors and OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
