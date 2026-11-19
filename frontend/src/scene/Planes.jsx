@@ -13,7 +13,7 @@ function Bridge({ s, docked }) {
   const ang = s.heading + 180 + (docked ? 18 : 30)
   return (
     <g transform={'translate(' + base[0] + ' ' + base[1] + ') rotate(' + ang + ')'}>
-      <rect className="bridge" x={-len} y={-2.6} width={len} height={5.2} rx="1.2" fill="#aeb8c3" stroke="#5f6b78"
+      <rect className="bridge" x={0} y={-2.6} width={len} height={5.2} rx="1.2" fill="#aeb8c3" stroke="#5f6b78"
         strokeWidth="0.7" />
       <circle r="3.4" fill="#8f9aa6" stroke="#5f6b78" strokeWidth="0.7" />
     </g>

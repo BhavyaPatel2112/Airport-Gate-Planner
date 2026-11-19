@@ -222,7 +222,8 @@ export default function AirportScene() {
         <button className="tool" title="Zoom in" onClick={() => { touched.current = true; setCam((c) => ({ ...c, z: Math.min(MAX_ZOOM, c.z * 1.25) })) }}>+</button>
         <button className="tool" title="Zoom out" onClick={() => { touched.current = true; setCam((c) => ({ ...c, z: Math.max(minZoom, c.z / 1.25) })) }}>-</button>
         <button className="tool" title="Reset view" onClick={() => { app.setFollow(null); touched.current = false; setCam({ ...HOME, z: fitZoom(aspect) }) }}>⌂</button>
-        <button className={'tool' + (app.tilt ? ' on' : '')} title="3D tilt" onClick={() => app.setTilt(!app.tilt)}>3D</button>
+        <button className={'tool' + (app.tilt ? ' on' : '')} title="Tilt the map" onClick={() => app.setTilt(!app.tilt)}>⟂</button>
+        <button className="tool wide" title="Switch to the 3D airport" onClick={() => app.setView('3d')}>3D</button>
         <button className={'tool' + (app.labels ? ' on' : '')} title="Flight labels" onClick={() => app.setLabels(!app.labels)}>Aa</button>
       </div>
       <div className="legend">

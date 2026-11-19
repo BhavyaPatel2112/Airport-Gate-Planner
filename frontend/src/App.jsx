@@ -4,6 +4,7 @@ import { api } from './api/client'
 import { AppContext } from './state/app'
 import { clock } from './state/clock'
 import AirportScene from './scene/AirportScene'
+import Airport3D from './scene3d/Airport3D'
 import SignageBar from './hud/SignageBar'
 import TimeControls from './hud/TimeControls'
 import WelcomeScreen from './hud/WelcomeScreen'
@@ -59,6 +60,9 @@ export default function App() {
   const [story, setStory] = useState(false)
   const [boardTick, setBoardTick] = useState(0)
   const [searchResult, setSearchResult] = useState(null)
+  const [view, setView] = useState(params.get('view') === '2d' ? '2d' : '3d')
+  const [introPending, setIntroPending] = useState(!params.has('start'))
+  const cameraRef = useRef(null)
   const opSeq = useRef(0)
 
   const visitsById = useMemo(() => {
@@ -142,7 +146,11 @@ export default function App() {
     effects, storm, setStorm, caption, setCaption, sound, setSound, reducedMotion, setReducedMotion,
     drawer, setDrawer, tilt, setTilt, labels, setLabels,
     focusStand: focus.stand, focusTick: focus.tick, focusOn: (stand) => setFocus((f) => ({ stand, tick: f.tick + 1 })),
-    story, setStory, boardTick, searchResult, setSearchResult
+    story, setStory, boardTick, searchResult, setSearchResult,
+    view, setView,
+    registerCamera: (fn) => { cameraRef.current = fn },
+    flyTo: (spec) => { if (cameraRef.current) cameraRef.current(spec) },
+    introPending, consumeIntro: () => setIntroPending(false)
   }
 
   return (
@@ -152,7 +160,7 @@ export default function App() {
         <div className="main">
           <div className="stage">
             <div className="stage-scene">
-              <AirportScene />
+              {view === '3d' ? <Airport3D /> : <AirportScene />}
               <AnimatePresence>{selected && visitsById[selected] && <BoardingPassCard key={selected} />}</AnimatePresence>
               <Announcements />
               <div className="toasts">

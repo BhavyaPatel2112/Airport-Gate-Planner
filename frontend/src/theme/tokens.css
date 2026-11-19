@@ -10,15 +10,15 @@
   --danger: #ff4d4d;
   --cyan: #38d7ff;
 
-  --bg: #070b13;
-  --panel: rgba(13, 19, 31, 0.92);
-  --panel-2: #111a2a;
-  --panel-3: #172235;
-  --line: rgba(130, 170, 210, 0.14);
-  --line-strong: rgba(130, 170, 210, 0.28);
-  --text: #e8eef7;
-  --text-2: #b4c0d2;
-  --muted: #7d8aa0;
+  --bg: #070708;
+  --panel: rgba(17, 18, 19, 0.94);
+  --panel-2: #141516;
+  --panel-3: #1b1c1e;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text: #fdfaf7;
+  --text-2: #b9b4b0;
+  --muted: #8a8583;
 
   --u1: #7ad7f0;
   --u2: #b48cff;

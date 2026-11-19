@@ -96,6 +96,7 @@
   backdrop-filter: blur(6px);
 }
 .tool:hover { border-color: var(--cyan); }
+.tool.wide { color: #111; background: #fdfaf7; border-color: #fdfaf7; font-size: 11px; }
 .tool.on { color: #111; background: var(--sign-yellow); border-color: var(--sign-yellow); }
 .legend {
   position: absolute; z-index: 7; left: 10px; bottom: 10px; display: flex; gap: 12px;
