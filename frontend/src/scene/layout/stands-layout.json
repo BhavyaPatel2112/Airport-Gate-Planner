@@ -1,0 +1,2887 @@
+{
+ "world": {
+  "w": 2400,
+  "h": 1400
+ },
+ "core": [
+  1830.0,
+  400.0
+ ],
+ "armAngle": 35,
+ "armHalf": 18,
+ "armStart": 95,
+ "armEnd": 464,
+ "runways": [
+  {
+   "id": "09/27",
+   "a": [
+    360,
+    930
+   ],
+   "b": [
+    2200,
+    930
+   ],
+   "width": 34,
+   "ends": [
+    "09",
+    "27"
+   ]
+  },
+  {
+   "id": "14/32",
+   "a": [
+    820,
+    330
+   ],
+   "b": [
+    1559,
+    1211
+   ],
+   "width": 30,
+   "ends": [
+    "14",
+    "32"
+   ]
+  }
+ ],
+ "taxiways": [
+  {
+   "id": "B",
+   "pts": [
+    [
+     400,
+     868
+    ],
+    [
+     2240,
+     868
+    ]
+   ]
+  },
+  {
+   "id": "A",
+   "pts": [
+    [
+     420,
+     1000
+    ],
+    [
+     2240,
+     1000
+    ],
+    [
+     2240,
+     930
+    ]
+   ]
+  },
+  {
+   "id": "W",
+   "pts": [
+    [
+     1392,
+     868
+    ],
+    [
+     1392,
+     60
+    ]
+   ]
+  },
+  {
+   "id": "E",
+   "pts": [
+    [
+     2268,
+     868
+    ],
+    [
+     2268,
+     60
+    ]
+   ]
+  },
+  {
+   "id": "N",
+   "pts": [
+    [
+     1392,
+     60
+    ],
+    [
+     2268,
+     60
+    ]
+   ]
+  },
+  {
+   "id": "K",
+   "pts": [
+    [
+     1498,
+     868
+    ],
+    [
+     1498,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "K2",
+   "pts": [
+    [
+     2162,
+     868
+    ],
+    [
+     2162,
+     760
+    ]
+   ]
+  },
+  {
+   "id": "S",
+   "pts": [
+    [
+     1250,
+     1000
+    ],
+    [
+     1250,
+     1058
+    ],
+    [
+     450,
+     1058
+    ]
+   ]
+  },
+  {
+   "id": "R",
+   "pts": [
+    [
+     1580,
+     1000
+    ],
+    [
+     1580,
+     1196
+    ],
+    [
+     2350,
+     1196
+    ]
+   ]
+  }
+ ],
+ "stands": [
+  {
+   "id": "40A",
+   "x": 1672.5,
+   "y": 560.3,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1704.0,
+    605.4
+   ],
+   "bridge": [
+    1659.3,
+    541.5
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "40B",
+   "x": 1643.0,
+   "y": 581.0,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1674.5,
+    626.0
+   ],
+   "bridge": [
+    1629.8,
+    562.2
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "41A",
+   "x": 1613.5,
+   "y": 601.6,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1645.1,
+    646.7
+   ],
+   "bridge": [
+    1600.3,
+    582.8
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "41B",
+   "x": 1584.0,
+   "y": 622.3,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1615.6,
+    667.3
+   ],
+   "bridge": [
+    1570.8,
+    603.5
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "42A",
+   "x": 1554.5,
+   "y": 642.9,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1586.1,
+    688.0
+   ],
+   "bridge": [
+    1541.3,
+    624.1
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "42B",
+   "x": 1525.0,
+   "y": 663.6,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1556.6,
+    708.6
+   ],
+   "bridge": [
+    1511.8,
+    644.7
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "43",
+   "x": 1495.5,
+   "y": 684.2,
+   "heading": -125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-S",
+   "terminal": "T2",
+   "lane": [
+    1527.1,
+    729.3
+   ],
+   "bridge": [
+    1482.4,
+    665.4
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "44A",
+   "x": 1610.7,
+   "y": 503.5,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1579.2,
+    458.4
+   ],
+   "bridge": [
+    1623.9,
+    522.3
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "44B",
+   "x": 1581.2,
+   "y": 524.1,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1549.7,
+    479.1
+   ],
+   "bridge": [
+    1594.4,
+    543.0
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "45A",
+   "x": 1551.7,
+   "y": 544.8,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1520.2,
+    499.7
+   ],
+   "bridge": [
+    1564.9,
+    563.6
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "46A",
+   "x": 1522.2,
+   "y": 565.4,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1490.7,
+    520.4
+   ],
+   "bridge": [
+    1535.4,
+    584.3
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "46B",
+   "x": 1492.7,
+   "y": 586.1,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1461.2,
+    541.0
+   ],
+   "bridge": [
+    1505.9,
+    604.9
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "47A",
+   "x": 1463.3,
+   "y": 606.7,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "SW-N",
+   "terminal": "T2",
+   "lane": [
+    1431.7,
+    561.7
+   ],
+   "bridge": [
+    1476.5,
+    625.6
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "47B",
+   "x": 1610.7,
+   "y": 296.5,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1579.2,
+    341.6
+   ],
+   "bridge": [
+    1623.9,
+    277.7
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "48A",
+   "x": 1581.2,
+   "y": 275.9,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1549.7,
+    320.9
+   ],
+   "bridge": [
+    1594.4,
+    257.0
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "48B",
+   "x": 1551.7,
+   "y": 255.2,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1520.2,
+    300.3
+   ],
+   "bridge": [
+    1564.9,
+    236.4
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "49A",
+   "x": 1522.2,
+   "y": 234.6,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1490.7,
+    279.6
+   ],
+   "bridge": [
+    1535.4,
+    215.7
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "49B",
+   "x": 1492.7,
+   "y": 213.9,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1461.2,
+    259.0
+   ],
+   "bridge": [
+    1505.9,
+    195.1
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "50",
+   "x": 1463.3,
+   "y": 193.3,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-S",
+   "terminal": "T2",
+   "lane": [
+    1431.7,
+    238.3
+   ],
+   "bridge": [
+    1476.5,
+    174.4
+   ],
+   "taxiway": "W"
+  },
+  {
+   "id": "38",
+   "x": 1657.7,
+   "y": 229.3,
+   "heading": 125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-N",
+   "terminal": "T2",
+   "lane": [
+    1689.3,
+    184.3
+   ],
+   "bridge": [
+    1644.5,
+    248.2
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "39",
+   "x": 1628.2,
+   "y": 208.7,
+   "heading": 125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-N",
+   "terminal": "T2",
+   "lane": [
+    1659.8,
+    163.6
+   ],
+   "bridge": [
+    1615.1,
+    227.5
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "51",
+   "x": 1598.8,
+   "y": 188.0,
+   "heading": 125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "NW-N",
+   "terminal": "T2",
+   "lane": [
+    1630.3,
+    143.0
+   ],
+   "bridge": [
+    1585.6,
+    206.9
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "52",
+   "x": 1567.6,
+   "y": 154.0,
+   "heading": 125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": false,
+   "group": "NW-N",
+   "terminal": "T2",
+   "lane": [
+    1593.4,
+    117.2
+   ],
+   "bridge": [
+    1548.7,
+    181.1
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "53",
+   "x": 1523.4,
+   "y": 123.1,
+   "heading": 125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": false,
+   "group": "NW-N",
+   "terminal": "T2",
+   "lane": [
+    1549.2,
+    86.2
+   ],
+   "bridge": [
+    1504.5,
+    150.1
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "66",
+   "x": 1989.2,
+   "y": 573.7,
+   "heading": -55.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    1963.3,
+    610.6
+   ],
+   "bridge": [
+    2008.1,
+    546.7
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "65A",
+   "x": 2031.8,
+   "y": 591.3,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    2000.2,
+    636.4
+   ],
+   "bridge": [
+    2044.9,
+    572.5
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "65B",
+   "x": 2061.2,
+   "y": 612.0,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    2029.7,
+    657.0
+   ],
+   "bridge": [
+    2074.4,
+    593.1
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "67A",
+   "x": 2090.7,
+   "y": 632.6,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    2059.2,
+    677.7
+   ],
+   "bridge": [
+    2103.9,
+    613.8
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "67B",
+   "x": 2120.2,
+   "y": 653.3,
+   "heading": -55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    2088.7,
+    698.3
+   ],
+   "bridge": [
+    2133.4,
+    634.4
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "68",
+   "x": 2151.3,
+   "y": 687.3,
+   "heading": -55.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "SE-S",
+   "terminal": "T2",
+   "lane": [
+    2125.5,
+    724.1
+   ],
+   "bridge": [
+    2170.3,
+    660.2
+   ],
+   "taxiway": "K"
+  },
+  {
+   "id": "69",
+   "x": 2055.0,
+   "y": 495.3,
+   "heading": 125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "SE-N",
+   "terminal": "T2",
+   "lane": [
+    2080.8,
+    458.4
+   ],
+   "bridge": [
+    2036.1,
+    522.3
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "70A",
+   "x": 2086.2,
+   "y": 529.3,
+   "heading": 125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-N",
+   "terminal": "T2",
+   "lane": [
+    2117.7,
+    484.3
+   ],
+   "bridge": [
+    2073.0,
+    548.2
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "70B",
+   "x": 2115.6,
+   "y": 550.0,
+   "heading": 125.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "SE-N",
+   "terminal": "T2",
+   "lane": [
+    2147.2,
+    504.9
+   ],
+   "bridge": [
+    2102.5,
+    568.8
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "71",
+   "x": 2158.2,
+   "y": 567.6,
+   "heading": 125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "SE-N",
+   "terminal": "T2",
+   "lane": [
+    2184.1,
+    530.7
+   ],
+   "bridge": [
+    2139.3,
+    594.6
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "72",
+   "x": 2202.5,
+   "y": 598.6,
+   "heading": 125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "SE-N",
+   "terminal": "T2",
+   "lane": [
+    2228.3,
+    561.7
+   ],
+   "bridge": [
+    2183.5,
+    625.6
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "73",
+   "x": 2062.4,
+   "y": 299.5,
+   "heading": -125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-S",
+   "terminal": "T2",
+   "lane": [
+    2088.2,
+    336.4
+   ],
+   "bridge": [
+    2043.5,
+    272.5
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "74",
+   "x": 2106.6,
+   "y": 268.6,
+   "heading": -125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-S",
+   "terminal": "T2",
+   "lane": [
+    2132.4,
+    305.4
+   ],
+   "bridge": [
+    2087.7,
+    241.5
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "75",
+   "x": 2150.9,
+   "y": 237.6,
+   "heading": -125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-S",
+   "terminal": "T2",
+   "lane": [
+    2176.7,
+    274.4
+   ],
+   "bridge": [
+    2131.9,
+    210.6
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "76",
+   "x": 2195.1,
+   "y": 206.6,
+   "heading": -125.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-S",
+   "terminal": "T2",
+   "lane": [
+    2220.9,
+    243.5
+   ],
+   "bridge": [
+    2176.2,
+    179.6
+   ],
+   "taxiway": "E"
+  },
+  {
+   "id": "77",
+   "x": 1996.5,
+   "y": 221.1,
+   "heading": 55.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-N",
+   "terminal": "T2",
+   "lane": [
+    1970.7,
+    184.3
+   ],
+   "bridge": [
+    2015.5,
+    248.2
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "78",
+   "x": 2040.8,
+   "y": 190.2,
+   "heading": 55.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-N",
+   "terminal": "T2",
+   "lane": [
+    2014.9,
+    153.3
+   ],
+   "bridge": [
+    2059.7,
+    217.2
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "86",
+   "x": 2085.0,
+   "y": 159.2,
+   "heading": 55.0,
+   "size": "WIDE",
+   "contact": true,
+   "intl": true,
+   "group": "NE-N",
+   "terminal": "T2",
+   "lane": [
+    2059.2,
+    122.3
+   ],
+   "bridge": [
+    2103.9,
+    186.2
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "87A",
+   "x": 2127.6,
+   "y": 141.6,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "NE-N",
+   "terminal": "T2",
+   "lane": [
+    2096.0,
+    96.5
+   ],
+   "bridge": [
+    2140.8,
+    160.4
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "87B",
+   "x": 2157.1,
+   "y": 120.9,
+   "heading": 55.0,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "NE-N",
+   "terminal": "T2",
+   "lane": [
+    2125.5,
+    75.9
+   ],
+   "bridge": [
+    2170.3,
+    139.8
+   ],
+   "taxiway": "N"
+  },
+  {
+   "id": "45A1",
+   "x": 1328,
+   "y": 139.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    139.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45A2",
+   "x": 1328,
+   "y": 177.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    177.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45B1",
+   "x": 1328,
+   "y": 215.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    215.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45B2",
+   "x": 1328,
+   "y": 253.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    253.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45C1",
+   "x": 1328,
+   "y": 291.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    291.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45C2",
+   "x": 1328,
+   "y": 329.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    329.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45D1",
+   "x": 1328,
+   "y": 367.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    367.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "45D2",
+   "x": 1328,
+   "y": 405.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    405.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "54",
+   "x": 1328,
+   "y": 443.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    443.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "55",
+   "x": 1328,
+   "y": 481.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    481.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "56",
+   "x": 1328,
+   "y": 519.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    519.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "57",
+   "x": 1328,
+   "y": 557.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    557.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "58",
+   "x": 1328,
+   "y": 595.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    595.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "59",
+   "x": 1328,
+   "y": 633.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    633.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "60",
+   "x": 1328,
+   "y": 671.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    671.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "61",
+   "x": 1328,
+   "y": 709.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    709.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "62",
+   "x": 1328,
+   "y": 747.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    747.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "63",
+   "x": 1328,
+   "y": 785.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    785.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "64",
+   "x": 1328,
+   "y": 823.0,
+   "heading": 180,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-W",
+   "terminal": "T2",
+   "lane": [
+    1392,
+    823.0
+   ],
+   "bridge": null,
+   "taxiway": "W"
+  },
+  {
+   "id": "85A1",
+   "x": 2334,
+   "y": 169.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    169.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "85A2",
+   "x": 2334,
+   "y": 207.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    207.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "85B1",
+   "x": 2334,
+   "y": 245.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    245.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "85B2",
+   "x": 2334,
+   "y": 283.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    283.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "85C1",
+   "x": 2334,
+   "y": 321.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    321.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "85C2",
+   "x": 2334,
+   "y": 359.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    359.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "88A",
+   "x": 2334,
+   "y": 397.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    397.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "88B",
+   "x": 2334,
+   "y": 435.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    435.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "89A",
+   "x": 2334,
+   "y": 473.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    473.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "89B",
+   "x": 2334,
+   "y": 511.0,
+   "heading": 0,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    511.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "90",
+   "x": 2334,
+   "y": 557.0,
+   "heading": 0,
+   "size": "WIDE",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    557.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "91",
+   "x": 2334,
+   "y": 611.0,
+   "heading": 0,
+   "size": "WIDE",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    611.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "92",
+   "x": 2334,
+   "y": 665.0,
+   "heading": 0,
+   "size": "WIDE",
+   "contact": false,
+   "intl": true,
+   "group": "REM-E",
+   "terminal": "T2",
+   "lane": [
+    2268,
+    665.0
+   ],
+   "bridge": null,
+   "taxiway": "E"
+  },
+  {
+   "id": "9",
+   "x": 488.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    488.0,
+    1058
+   ],
+   "bridge": [
+    488.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "10",
+   "x": 524.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    524.0,
+    1058
+   ],
+   "bridge": [
+    524.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "11",
+   "x": 560.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    560.0,
+    1058
+   ],
+   "bridge": [
+    560.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "12",
+   "x": 596.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    596.0,
+    1058
+   ],
+   "bridge": [
+    596.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "13",
+   "x": 632.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    632.0,
+    1058
+   ],
+   "bridge": [
+    632.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "14",
+   "x": 668.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    668.0,
+    1058
+   ],
+   "bridge": [
+    668.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "15",
+   "x": 704.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    704.0,
+    1058
+   ],
+   "bridge": [
+    704.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "16",
+   "x": 740.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    740.0,
+    1058
+   ],
+   "bridge": [
+    740.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "17",
+   "x": 776.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    776.0,
+    1058
+   ],
+   "bridge": [
+    776.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "18",
+   "x": 812.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    812.0,
+    1058
+   ],
+   "bridge": [
+    812.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "19",
+   "x": 848.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    848.0,
+    1058
+   ],
+   "bridge": [
+    848.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "20",
+   "x": 884.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    884.0,
+    1058
+   ],
+   "bridge": [
+    884.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "21",
+   "x": 920.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    920.0,
+    1058
+   ],
+   "bridge": [
+    920.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "22",
+   "x": 956.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    956.0,
+    1058
+   ],
+   "bridge": [
+    956.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "23",
+   "x": 992.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    992.0,
+    1058
+   ],
+   "bridge": [
+    992.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "24",
+   "x": 1028.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1028.0,
+    1058
+   ],
+   "bridge": [
+    1028.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "25",
+   "x": 1064.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1064.0,
+    1058
+   ],
+   "bridge": [
+    1064.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "26",
+   "x": 1100.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1100.0,
+    1058
+   ],
+   "bridge": [
+    1100.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "27",
+   "x": 1136.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1136.0,
+    1058
+   ],
+   "bridge": [
+    1136.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "28",
+   "x": 1172.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1172.0,
+    1058
+   ],
+   "bridge": [
+    1172.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "29",
+   "x": 1208.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1208.0,
+    1058
+   ],
+   "bridge": [
+    1208.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "30",
+   "x": 1244.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": true,
+   "intl": true,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1244.0,
+    1058
+   ],
+   "bridge": [
+    1244.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "31",
+   "x": 1280.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1280.0,
+    1058
+   ],
+   "bridge": [
+    1280.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "32",
+   "x": 1316.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1316.0,
+    1058
+   ],
+   "bridge": [
+    1316.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "33",
+   "x": 1352.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1352.0,
+    1058
+   ],
+   "bridge": [
+    1352.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "34",
+   "x": 1388.0,
+   "y": 1112.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "T1",
+   "terminal": "T1",
+   "lane": [
+    1388.0,
+    1058
+   ],
+   "bridge": [
+    1388.0,
+    1136
+   ],
+   "taxiway": "S"
+  },
+  {
+   "id": "R01",
+   "x": 1629.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1629.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R02",
+   "x": 1667.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1667.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R03",
+   "x": 1705.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1705.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R04",
+   "x": 1743.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1743.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R05",
+   "x": 1781.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1781.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R06",
+   "x": 1819.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1819.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R07",
+   "x": 1857.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1857.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R08",
+   "x": 1895.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1895.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R09",
+   "x": 1933.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1933.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R10",
+   "x": 1971.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    1971.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R11",
+   "x": 2009.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2009.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R12",
+   "x": 2047.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2047.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R13",
+   "x": 2085.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2085.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R14",
+   "x": 2123.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2123.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R15",
+   "x": 2161.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2161.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R16",
+   "x": 2199.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2199.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R17",
+   "x": 2237.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2237.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R18",
+   "x": 2275.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2275.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R19",
+   "x": 2313.0,
+   "y": 1146.0,
+   "heading": -90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SA",
+   "terminal": "T2",
+   "lane": [
+    2313.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R20",
+   "x": 1629.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1629.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R21",
+   "x": 1667.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1667.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R22",
+   "x": 1705.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1705.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R23",
+   "x": 1751.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "WIDE",
+   "contact": false,
+   "intl": false,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1751.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R24",
+   "x": 1797.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1797.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R25",
+   "x": 1835.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1835.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R26",
+   "x": 1873.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1873.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R27",
+   "x": 1911.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1911.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R28",
+   "x": 1949.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1949.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R29",
+   "x": 1987.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    1987.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R30",
+   "x": 2025.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    2025.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R31",
+   "x": 2063.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    2063.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R32",
+   "x": 2101.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    2101.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R33",
+   "x": 2139.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "NARROW",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    2139.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  },
+  {
+   "id": "R34",
+   "x": 2185.0,
+   "y": 1246.0,
+   "heading": 90,
+   "size": "WIDE",
+   "contact": false,
+   "intl": true,
+   "group": "REM-SB",
+   "terminal": "T2",
+   "lane": [
+    2185.0,
+    1196
+   ],
+   "bridge": null,
+   "taxiway": "R"
+  }
+ ],
+ "groups": {
+  "SW-S": {
+   "lane": [
+    [
+     1493.5,
+     752.8
+    ],
+    [
+     1733.5,
+     584.8
+    ]
+   ],
+   "taxiway": "K",
+   "kind": "pier"
+  },
+  "SW-N": {
+   "lane": [
+    [
+     1383.4,
+     595.5
+    ],
+    [
+     1623.4,
+     427.5
+    ]
+   ],
+   "taxiway": "W",
+   "kind": "pier"
+  },
+  "NW-S": {
+   "lane": [
+    [
+     1383.4,
+     204.5
+    ],
+    [
+     1623.4,
+     372.5
+    ]
+   ],
+   "taxiway": "W",
+   "kind": "pier"
+  },
+  "NW-N": {
+   "lane": [
+    [
+     1493.5,
+     47.2
+    ],
+    [
+     1733.5,
+     215.2
+    ]
+   ],
+   "taxiway": "N",
+   "kind": "pier"
+  },
+  "SE-S": {
+   "lane": [
+    [
+     2166.5,
+     752.8
+    ],
+    [
+     1926.5,
+     584.8
+    ]
+   ],
+   "taxiway": "K",
+   "kind": "pier"
+  },
+  "SE-N": {
+   "lane": [
+    [
+     2276.6,
+     595.5
+    ],
+    [
+     2036.6,
+     427.5
+    ]
+   ],
+   "taxiway": "E",
+   "kind": "pier"
+  },
+  "NE-S": {
+   "lane": [
+    [
+     2276.6,
+     204.5
+    ],
+    [
+     2036.6,
+     372.5
+    ]
+   ],
+   "taxiway": "E",
+   "kind": "pier"
+  },
+  "NE-N": {
+   "lane": [
+    [
+     2166.5,
+     47.2
+    ],
+    [
+     1926.5,
+     215.2
+    ]
+   ],
+   "taxiway": "N",
+   "kind": "pier"
+  },
+  "REM-W": {
+   "lane": [
+    [
+     1392,
+     870
+    ],
+    [
+     1392,
+     120
+    ]
+   ],
+   "taxiway": "W",
+   "kind": "remote"
+  },
+  "REM-E": {
+   "lane": [
+    [
+     2268,
+     870
+    ],
+    [
+     2268,
+     150
+    ]
+   ],
+   "taxiway": "E",
+   "kind": "remote"
+  },
+  "T1": {
+   "lane": [
+    [
+     1420,
+     1058
+    ],
+    [
+     450,
+     1058
+    ]
+   ],
+   "taxiway": "S",
+   "kind": "pier"
+  },
+  "REM-SA": {
+   "lane": [
+    [
+     1580,
+     1196
+    ],
+    [
+     2350,
+     1196
+    ]
+   ],
+   "taxiway": "R",
+   "kind": "remote"
+  },
+  "REM-SB": {
+   "lane": [
+    [
+     1580,
+     1196
+    ],
+    [
+     2350,
+     1196
+    ]
+   ],
+   "taxiway": "R",
+   "kind": "remote"
+  }
+ }
+}
