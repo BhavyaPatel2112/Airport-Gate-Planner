@@ -20,6 +20,7 @@ ATLAS SkillTech University. Team: Bhavya Patel and Tanushree.
 
 | Feature | What you see | Algorithm (unit) |
 |---|---|---|
+| 3D digital twin | A Three.js model of the airport built from the stand layout: terminals, jet bridges and aircraft that land, taxi, park and take off; cinematic camera moves, a clay model view, an analytics panel and a 2D map fallback | Display only; every position follows the stand and times from Java |
 | Live Mumbai Day | Real flights land, taxi, park, push back and take off on a replay clock (1x to 1440x) | Counting sort (U1), segment tree (U3) |
 | Smart Stand Assignment | Every flight on a compatible stand, fewest stands per class, with a proof badge | Interval partitioning on a Fibonacci heap (U2), segment tree lower bound (U3) |
 | Delay Shield | Delay or cancel any flight; clashes found instantly and re-planned | Red-black interval tree (U3), bipartite matching (U5) |
@@ -194,20 +195,26 @@ Errors use `{error, message, details}`: 400 for invalid input (for example a neg
 
 ```
 backend/   Spring Boot app: model, data import, algo (all assessed algorithms), engine, api, bench
-frontend/  React + Vite: scene (airport and planes), hud, machine views, panels
+frontend/  React + Vite: scene3d (Three.js airport), scene (2D map), hud, machine views, panels
 data/      flights_day1.csv, flights_day2.csv, stands.csv, notices.txt, delay_stats.csv, raw/
 docs/      benchmarks (CSV and notes), screenshots
 ```
 
 ## Screenshots
 
-| Monsoon storm and recovery | The race: greedy versus matching |
+| Monsoon storm: reassignment arcs | Terminal 2 close up |
 |---|---|
-| ![Monsoon storm](docs/screenshots/storm.png) | ![The race](docs/screenshots/race.png) |
+| ![Monsoon storm](docs/screenshots/storm.png) | ![Terminal 2](docs/screenshots/terminal2.png) |
 
-| Welcome | Night operations |
+| Clay model view | 2D map |
 |---|---|
-| ![Welcome screen](docs/screenshots/welcome.png) | ![Night](docs/screenshots/night.png) |
+| ![Clay model](docs/screenshots/clay.png) | ![2D map](docs/screenshots/map2d.png) |
+
+| The race: greedy versus matching | Night operations |
+|---|---|
+| ![The race](docs/screenshots/race.png) | ![Night](docs/screenshots/night.png) |
+
+![Welcome screen](docs/screenshots/welcome.png)
 
 ## Contributions
 
