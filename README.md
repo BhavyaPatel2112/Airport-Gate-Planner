@@ -20,6 +20,7 @@ ATLAS SkillTech University. Team: Bhavya Patel and Tanushree.
 
 | Feature | What you see | Algorithm (unit) |
 |---|---|---|
+| 3D digital twin | A Three.js model of the airport built from the stand layout: terminals, jet bridges and aircraft that land, taxi, park and take off; cinematic camera moves, a clay model view, an analytics panel and a 2D map fallback | Display only; every position follows the stand and times from Java |
 | Live Mumbai Day | Real flights land, taxi, park, push back and take off on a replay clock (1x to 1440x) | Counting sort (U1), segment tree (U3) |
 | Smart Stand Assignment | Every flight on a compatible stand, fewest stands per class, with a proof badge | Interval partitioning on a Fibonacci heap (U2), segment tree lower bound (U3) |
 | Delay Shield | Delay or cancel any flight; clashes found instantly and re-planned | Red-black interval tree (U3), bipartite matching (U5) |
@@ -194,32 +195,42 @@ Errors use `{error, message, details}`: 400 for invalid input (for example a neg
 
 ```
 backend/   Spring Boot app: model, data import, algo (all assessed algorithms), engine, api, bench
-frontend/  React + Vite: scene (airport and planes), hud, machine views, panels
+frontend/  React + Vite: scene3d (Three.js airport), scene (2D map), hud, machine views, panels
 data/      flights_day1.csv, flights_day2.csv, stands.csv, notices.txt, delay_stats.csv, raw/
 docs/      benchmarks (CSV and notes), screenshots
 ```
 
 ## Screenshots
 
-| Monsoon storm and recovery | The race: greedy versus matching |
+| Monsoon storm: reassignment arcs | Terminal 2 close up |
 |---|---|
-| ![Monsoon storm](docs/screenshots/storm.png) | ![The race](docs/screenshots/race.png) |
+| ![Monsoon storm](docs/screenshots/storm.png) | ![Terminal 2](docs/screenshots/terminal2.png) |
 
-| Welcome | Night operations |
+| Clay model view | 2D map |
 |---|---|
-| ![Welcome screen](docs/screenshots/welcome.png) | ![Night](docs/screenshots/night.png) |
+| ![Clay model](docs/screenshots/clay.png) | ![2D map](docs/screenshots/map2d.png) |
+
+| The race: greedy versus matching | Night operations |
+|---|---|
+| ![The race](docs/screenshots/race.png) | ![Night](docs/screenshots/night.png) |
+
+![Welcome screen](docs/screenshots/welcome.png)
 
 ## Contributions
 
-Bhavya Patel: data import and flight fetching, domain model, counting sort, segment tree,
-red-black interval tree, bipartite matching and min-cut, trie, the planner and recovery engine,
-flight and plan endpoints, the airport scene, HUD, story mode, race and the red-black tree and
-matching views.
+Bhavya Patel: data import and flight fetching, domain model, counting sort, lazy segment tree,
+red-black interval tree, Edmonds-Karp bipartite matching and min-cut, trie, the gate planner with its
+optimality certificate, the recovery engine, the flight and plan endpoints, the app shell (layout,
+top bar, side panel, dock, flight card, guide), the scenario lab screen and the overview and
+algorithms tabs.
 
 Tanushree: Fibonacci and binary heaps, suffix array, LCP, suffix tree and KMP, randomized
 Quickselect and median-of-medians, the exact solver and NP-hardness study, availability radar,
-notices, storms and rush hour, statistics and benchmarks, the departures board, announcements,
-chaos desk, notice teletype, leaderboard, benchmark lab and the Fibonacci heap and suffix tree views.
+notices, storms and rush hour, statistics and benchmarks, min-cost flow (fewest aircraft moved,
+shortest tows), the scenario engine and the step-by-step "Fix everything" replay, the story arrival
+(fixed stand plan against the planner), the 3D airport, the story flight, and the departures board,
+announcements, chaos desk, notice teletype, leaderboard, benchmark lab and the Fibonacci heap and
+suffix tree views.
 
 Tanushree's laptop stopped working during the project. With faculty approval, her part was
 developed on Bhavya's machine and pushed from her own account.
