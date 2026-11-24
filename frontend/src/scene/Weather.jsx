@@ -5,9 +5,19 @@ import { useEffect, useRef, useState } from 'react'
 export default function Weather({ active, severity, reducedMotion }) {
   const canvas = useRef(null)
   const [flash, setFlash] = useState(false)
+  // the rain stays on screen a little after the storm ends, fading out, so the weather clears instead of switching off
+  const [on, setOn] = useState(active)
+  useEffect(() => {
+    if (active) {
+      setOn(true)
+      return undefined
+    }
+    const t = setTimeout(() => setOn(false), 3200)
+    return () => clearTimeout(t)
+  }, [active])
 
   useEffect(() => {
-    if (!active || reducedMotion) return undefined
+    if (!on || reducedMotion) return undefined
     const c = canvas.current
     const ctx = c.getContext('2d')
     let raf = 0
@@ -45,7 +55,7 @@ export default function Weather({ active, severity, reducedMotion }) {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', resize)
     }
-  }, [active, severity, reducedMotion])
+  }, [on, severity, reducedMotion])
 
   useEffect(() => {
     if (!active || reducedMotion) return undefined
@@ -68,12 +78,12 @@ export default function Weather({ active, severity, reducedMotion }) {
     }
   }, [active, reducedMotion])
 
-  if (!active) return null
+  if (!on) return null
   return (
     <>
-      <canvas ref={canvas} className="rain" />
-      <div className={'lightning' + (flash ? ' on' : '')} />
-      <div className="monsoon-banner">
+      <canvas ref={canvas} className={'rain' + (active ? '' : ' clearing')} />
+      <div className={'lightning' + (flash && active ? ' on' : '')} />
+      <div className={'monsoon-banner' + (active ? '' : ' clearing')}>
         <span className="pulse-dot" /> MONSOON ALERT · heavy rain over Mumbai · severity p{severity}
       </div>
     </>
