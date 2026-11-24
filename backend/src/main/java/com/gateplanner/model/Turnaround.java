@@ -67,6 +67,17 @@ public final class Turnaround {
         return t;
     }
 
+    /** Copy of this visit flown by a different aircraft size (an aircraft swap); times and buffer are kept. */
+    public Turnaround resized(SizeClass newSize) {
+        Turnaround t = new Turnaround(id, arrival, departure, newSize, international, terminal, airlineCode, airline,
+                registration, paired, synthetic, schedStart, schedEnd, actualStart, actualEnd);
+        t.start = start;
+        t.end = end;
+        t.buffer = buffer;
+        t.cancelled = cancelled;
+        return t;
+    }
+
     public String getId() { return id; }
     public Flight getArrival() { return arrival; }
     public Flight getDeparture() { return departure; }
