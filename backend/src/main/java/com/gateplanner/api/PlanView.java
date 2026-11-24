@@ -17,7 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 /** Full plan as JSON: everything the frontend needs to draw and animate the airport. */
-public record PlanView(String planId, int day, int version, int bufferPercentile, String summary, Stats stats,
+public record PlanView(String planId, int day, int version, int bufferPercentile, String recovery, String summary,
+                       Stats stats,
                        Object certificate, List<StandView> stands, List<VisitView> visits, List<Closure> closures,
                        List<Notice> notices, List<PlanEvent> events, List<TraceEntry> trace,
                        Map<String, Object> snapshots, List<String> warnings) {
@@ -41,7 +42,7 @@ public record PlanView(String planId, int day, int version, int bufferPercentile
                             String reason, FlightView arrival, FlightView departure) {
     }
 
-    private static final List<String> SNAPSHOT_KEYS = List.of("rbtree", "matching", "fibheap", "suffix");
+    private static final List<String> SNAPSHOT_KEYS = List.of("rbtree", "matching", "fibheap", "suffix", "replan");
 
     public static PlanView of(PlanService.Operation op) {
         return of(op.plan(), op.summary(), op.events(), op.trace().entries());
@@ -90,7 +91,8 @@ public record PlanView(String planId, int day, int version, int bufferPercentile
                 snaps.put(k, plan.getLastSnapshots().get(k));
             }
         }
-        return new PlanView(plan.getId(), plan.getDay(), plan.getVersion(), plan.getBufferPercentile(), summary, stats,
+        return new PlanView(plan.getId(), plan.getDay(), plan.getVersion(), plan.getBufferPercentile(),
+                plan.isGreedyRecovery() ? "GREEDY" : "MATCHING", summary, stats,
                 cert, stands, visits, plan.getClosures(), plan.getNotices(), events, trace, snaps, plan.getWarnings());
     }
 
