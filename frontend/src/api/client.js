@@ -21,8 +21,9 @@ async function request(method, path, body) {
 }
 
 export const api = {
-  createPlan: (day, bufferPercentile) => request('POST', '/plan', { day, bufferPercentile }),
+  createPlan: (day, bufferPercentile, recovery) => request('POST', '/plan', { day, bufferPercentile, recovery }),
   getPlan: (id) => request('GET', '/plan/' + id),
+  storyArrival: (day) => request('GET', '/story/arrival?day=' + day),
   occupancy: (id) => request('GET', '/plan/' + id + '/occupancy'),
   busiest: (id, window) => request('GET', '/plan/' + id + '/busiest?window=' + window),
   delay: (id, flight, minutes, atMinute) => request('POST', '/plan/' + id + '/delay', { flight, minutes, atMinute }),
@@ -32,6 +33,9 @@ export const api = {
   race: (id) => request('POST', '/plan/' + id + '/race'),
   search: (day, q) => request('GET', '/flights/search?day=' + day + '&q=' + encodeURIComponent(q)),
   storm: (id, severityPercentile, seed, from, to) => request('POST', '/plan/' + id + '/storm', { severityPercentile, seed, from, to }),
+  groundDelay: (id, from, to, minutes) => request('POST', '/plan/' + id + '/ground-delay', { from, to, minutes }),
+  replan: (id, from, hold = true) => request('POST', '/plan/' + id + '/replan', { from: Math.floor(from), hold }),
+  swap: (id, flight, size) => request('POST', '/plan/' + id + '/swap', { flight, size }),
   rush: (id, count, seed, atMinute) => request('POST', '/plan/' + id + '/rush', { count, seed, atMinute }),
   radar: (id, minute) => request('GET', '/plan/' + id + '/radar?minute=' + Math.floor(minute)),
   board: (id, minute, type, count) => request('GET', '/plan/' + id + '/board?minute=' + Math.floor(minute) + '&type=' + type + '&count=' + count),
