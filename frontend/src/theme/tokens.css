@@ -1,0 +1,34 @@
+:root {
+  --night-tarmac: #0b1220;
+  --apron-day: #5c6370;
+  --taxi-yellow: #f2c230;
+  --sign-black: #111111;
+  --sign-yellow: #ffcc00;
+  --board-yellow: #ffd24a;
+  --ok: #3ddc84;
+  --warn: #ffb020;
+  --danger: #ff4d4d;
+  --cyan: #38d7ff;
+
+  --bg: #070708;
+  --panel: rgba(17, 18, 19, 0.94);
+  --panel-2: #141516;
+  --panel-3: #1b1c1e;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --text: #fdfaf7;
+  --text-2: #b9b4b0;
+  --muted: #8a8583;
+
+  --u1: #7ad7f0;
+  --u2: #b48cff;
+  --u3: #3ddc84;
+  --u4: #ffb020;
+  --u5: #ff7a6b;
+  --u6: #f472b6;
+
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --radius: 10px;
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
