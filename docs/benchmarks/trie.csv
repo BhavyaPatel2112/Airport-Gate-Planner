@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+trie,650,trie prefix search,0.638,1823 nodes,500 searches; top 8: O(m + s) each
+trie,650,linear scan,2.074,,500 searches: O(n m) each
+trie,6500,trie prefix search,0.736,11857 nodes,500 searches; top 8: O(m + s) each
+trie,6500,linear scan,10.665,,500 searches: O(n m) each
+trie,65000,trie prefix search,0.641,57493 nodes,500 searches; top 8: O(m + s) each
+trie,65000,linear scan,105.132,,500 searches: O(n m) each

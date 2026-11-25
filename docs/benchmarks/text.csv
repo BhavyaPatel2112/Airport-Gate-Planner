@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+text,65,suffix tree,1.114,1384 chars,build once; then O(m + occ) per search
+text,65,KMP per search,1.647,,O(n + m) per search
+text,650,suffix tree,1.019,1384 chars,build once; then O(m + occ) per search
+text,650,KMP per search,1.652,,O(n + m) per search
+text,6500,suffix tree,3.827,1384 chars,build once; then O(m + occ) per search
+text,6500,KMP per search,16.495,,O(n + m) per search
