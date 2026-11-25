@@ -218,15 +218,19 @@ docs/      benchmarks (CSV and notes), screenshots
 
 ## Contributions
 
-Bhavya Patel: data import and flight fetching, domain model, counting sort, segment tree,
-red-black interval tree, bipartite matching and min-cut, trie, the planner and recovery engine,
-flight and plan endpoints, the airport scene, HUD, story mode, race and the red-black tree and
-matching views.
+Bhavya Patel: data import and flight fetching, domain model, counting sort, lazy segment tree,
+red-black interval tree, Edmonds-Karp bipartite matching and min-cut, trie, the gate planner with its
+optimality certificate, the recovery engine, the flight and plan endpoints, the app shell (layout,
+top bar, side panel, dock, flight card, guide), the scenario lab screen and the overview and
+algorithms tabs.
 
 Tanushree: Fibonacci and binary heaps, suffix array, LCP, suffix tree and KMP, randomized
 Quickselect and median-of-medians, the exact solver and NP-hardness study, availability radar,
-notices, storms and rush hour, statistics and benchmarks, the departures board, announcements,
-chaos desk, notice teletype, leaderboard, benchmark lab and the Fibonacci heap and suffix tree views.
+notices, storms and rush hour, statistics and benchmarks, min-cost flow (fewest aircraft moved,
+shortest tows), the scenario engine and the step-by-step "Fix everything" replay, the story arrival
+(fixed stand plan against the planner), the 3D airport, the story flight, and the departures board,
+announcements, chaos desk, notice teletype, leaderboard, benchmark lab and the Fibonacci heap and
+suffix tree views.
 
 Tanushree's laptop stopped working during the project. With faculty approval, her part was
 developed on Bhavya's machine and pushed from her own account.

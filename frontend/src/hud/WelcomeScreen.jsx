@@ -22,13 +22,9 @@ export default function WelcomeScreen({ onStart }) {
         <motion.h1 initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15 }}>
           Welcome to Mumbai
         </motion.h1>
-        <motion.div className="langs" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }}>
-          <span>मुंबई में आपका स्वागत है</span>
-          <span>मुंबईत आपले स्वागत आहे</span>
-        </motion.div>
         <div className="airport-name">Chhatrapati Shivaji Maharaj International Airport</div>
         <div className="welcome-cards">
-          <div><b>1,708</b><span>real flight movements on 16 and 17 November 2026</span></div>
+          <div><b>1,682</b><span>real flights on 16 and 17 November 2026</span></div>
           <div><b>136</b><span>stands across Terminal 1, Terminal 2 and remote aprons</span></div>
           <div><b>14</b><span>algorithms from all six syllabus units, all running in Java</span></div>
         </div>

@@ -10,7 +10,7 @@ export default function DataDrawer() {
         <table className="kv">
           <tbody>
             <tr><td>Flights</td><td>Real. AeroDataBox airport arrivals and departures for VABB, 16 and 17 November 2026
-              (837 and 871 movements): flight number, airline, aircraft model, registration, terminal, scheduled and actual
+              (837 and 871 rows; 835 and 847 flights once duplicate rows are merged): flight number, airline, aircraft model, registration, terminal, scheduled and actual
               times. Saved as CSV; the demo needs no internet.</td><td><span className="chip ok">real</span></td></tr>
             <tr><td>Delays</td><td>Real. Actual time minus scheduled time from the same data.</td><td><span className="chip ok">real</span></td></tr>
             <tr><td>Stands</td><td>71 of the 136 stand ids were observed as gates in the flight data; the rest complete the layout (remote
