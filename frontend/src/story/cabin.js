@@ -462,6 +462,7 @@ export class Cabin {
       uCloudBase: { value: 1800 }, uDryTrack: { value: 0 },
       uCity: { value: 0.9 }, uDusk: { value: landing ? 0.7 : 0.15 }, uRwyA: { value: 300 }, uRwyB: { value: -3600 } }
     this.speed = 0
+    this.trackers = []
     this.buildShell()
     this.buildWindows()
     this.buildBins()
@@ -638,8 +639,11 @@ export class Cabin {
     const handleMat = new THREE.MeshStandardMaterial({ color: '#9aa0a8', roughness: 0.3, metalness: 0.7 })
     const lampMat = new THREE.MeshBasicMaterial({ color: '#fff4e0' })
     const signMat = new THREE.MeshBasicMaterial({ color: '#7ad1ff' })
+    this.bins = []
+    this.buildOpenBins(binLen, mat, handleMat)
     for (let r = -2; r < ROWS; r += 2) {
       for (const s of [-1, 1]) {
+        if (r >= 0 && r <= 4) continue // the six bins over rows 1 to 6 open (buildOpenBins)
         const m = new THREE.Mesh(geo, mat)
         // profile x runs towards the aisle; place so the doors face the aisle
         m.scale.x = -s
@@ -671,6 +675,159 @@ export class Cabin {
           this.scene.add(sign)
         }
       }
+    }
+  }
+
+  /**
+   * The six bins over rows 1 to 6, one per unit: units 1, 3 and 5 on the left, 2, 4 and 6 on the right, nearest first.
+   * Each is an open box (bottom, wall side, top and two ends) with a separate curved door hinged at the top, so the door
+   * can swing up towards the ceiling. The inside lining glows in the unit colour while the bin is open.
+   */
+  buildOpenBins(binLen, mat, handleMat) {
+    // the door: a thin curved shell following the outside of the bin, from its bottom edge up to the hinge
+    const HINGE = [0.58, 0.53]
+    const door = new THREE.Shape()
+    door.moveTo(0.56, 0)
+    door.lineTo(0.62, 0)
+    door.quadraticCurveTo(0.72, 0.02, 0.74, 0.12)
+    door.lineTo(0.74, 0.32)
+    door.quadraticCurveTo(0.72, 0.47, HINGE[0], HINGE[1])
+    door.lineTo(0.575, 0.505)
+    door.quadraticCurveTo(0.695, 0.455, 0.716, 0.32)
+    door.lineTo(0.716, 0.125)
+    door.quadraticCurveTo(0.7, 0.04, 0.615, 0.022)
+    door.lineTo(0.56, 0.022)
+    door.lineTo(0.56, 0)
+    const doorGeo = new THREE.ExtrudeGeometry(door, { depth: binLen, bevelEnabled: false, curveSegments: 12 })
+    doorGeo.translate(-HINGE[0], -HINGE[1], 0)
+    // the box: bottom, wall side and top as one C-shaped profile, open towards the aisle
+    const box = new THREE.Shape()
+    box.moveTo(0, 0)
+    box.lineTo(0.56, 0)
+    box.lineTo(0.56, 0.022)
+    box.lineTo(0.022, 0.022)
+    box.lineTo(0.022, 0.59)
+    box.lineTo(0.42, 0.535)
+    box.lineTo(0.575, 0.505)
+    box.lineTo(HINGE[0], HINGE[1])
+    box.lineTo(0.42, 0.56)
+    box.lineTo(0, 0.62)
+    box.lineTo(0, 0)
+    const boxGeo = new THREE.ExtrudeGeometry(box, { depth: binLen, bevelEnabled: false })
+    // the two ends are the full outline of the bin
+    const end = new THREE.Shape()
+    end.moveTo(0, 0)
+    end.lineTo(0.62, 0)
+    end.quadraticCurveTo(0.72, 0.02, 0.74, 0.12)
+    end.lineTo(0.74, 0.32)
+    end.quadraticCurveTo(0.72, 0.47, HINGE[0], HINGE[1])
+    end.lineTo(0.42, 0.56)
+    end.lineTo(0, 0.62)
+    end.lineTo(0, 0)
+    const endGeo = new THREE.ShapeGeometry(end, 10)
+    const endMat = new THREE.MeshStandardMaterial({ color: '#e2ddd4', roughness: 0.6, side: THREE.DoubleSide })
+    // the cabin wall cuts through the back of each bin, so the lining sits just inside it: a sloping back
+    // from (0.17, 0.03) up to (0.565, 0.49) in the profile, and a floor from there to the door
+    const linerGeo = new THREE.PlaneGeometry(binLen - 0.04, 0.61)
+    const floorGeo = new THREE.PlaneGeometry(binLen - 0.04, 0.4)
+    const handleGeo = new RoundedBoxGeometry(0.03, 0.035, 0.32, 2, 0.01)
+    let k = 0
+    for (const r of [0, 2, 4]) {
+      for (const s of [-1, 1]) {
+        const colour = new THREE.Color(UNIT_COLOURS[k])
+        const g = new THREE.Group()
+        g.scale.x = -s
+        g.position.set(s * 1.92, 1.06, rowZ(r) + 0.43 - binLen)
+        const body = new THREE.Mesh(boxGeo, mat)
+        body.castShadow = true
+        g.add(body)
+        for (const z of [0.001, binLen - 0.001]) {
+          const e = new THREE.Mesh(endGeo, endMat)
+          e.position.z = z
+          g.add(e)
+        }
+        // the lining: dark grey, lit in the unit colour as the door opens
+        const liner = new THREE.MeshStandardMaterial({ color: '#23252e', roughness: 0.85, emissive: colour, emissiveIntensity: 0,
+          side: THREE.DoubleSide })
+        const back = new THREE.Mesh(linerGeo, liner)
+        back.rotation.order = 'ZYX'
+        back.rotation.set(0, Math.PI / 2, -0.71)
+        back.position.set(0.3675, 0.26, binLen / 2)
+        g.add(back)
+        const floor = new THREE.Mesh(floorGeo, liner)
+        floor.rotation.set(-Math.PI / 2, 0, Math.PI / 2)
+        floor.position.set(0.37, 0.024, binLen / 2)
+        g.add(floor)
+        // the door turns about the hinge line, which runs along the bin
+        const pivot = new THREE.Group()
+        pivot.position.set(HINGE[0], HINGE[1], 0)
+        g.add(pivot)
+        const d = new THREE.Mesh(doorGeo, mat)
+        d.castShadow = true
+        pivot.add(d)
+        const handle = new THREE.Mesh(handleGeo, handleMat)
+        handle.position.set(0.745 - HINGE[0], 0.3 - HINGE[1], binLen / 2)
+        pivot.add(handle)
+        // where the coloured dot sits: on the door face, just below the handle
+        const dot = new THREE.Object3D()
+        dot.position.set(0.75 - HINGE[0], 0.2 - HINGE[1], binLen / 2)
+        pivot.add(dot)
+        // the middle of the opening, where the text box comes out
+        const mouth = new THREE.Object3D()
+        mouth.position.set(0.62, 0.22, binLen / 2)
+        g.add(mouth)
+        this.scene.add(g)
+        this.bins.push({ side: s, z: rowZ(r) + 0.43 - binLen / 2, pivot, liner, dot, mouth, open: 0, target: 0 })
+        k++
+      }
+    }
+  }
+
+  /** Opens bin i (0 to 5, in unit order) and closes the others; -1 closes them all. */
+  openBin(i) {
+    this.bins.forEach((b, k) => { b.target = k === i ? 1 : 0 })
+  }
+
+  /** The camera steps up the aisle to stand under bin i and looks up into it; -1 goes back to the start. */
+  focusBin(i) {
+    if (i < 0) return this.focusRow(-1)
+    const b = this.bins[i]
+    this.camTarget.set(-b.side * 0.2, 0.86, b.z + 2.7)
+    this.lookTarget.set(b.side * 0.9, 1.08, b.z - 0.3)
+  }
+
+  /** Keeps a DOM element over a point in the scene; returns a function that stops it. */
+  track(el, obj, opts = {}) {
+    const t = { el, obj, ...opts }
+    this.trackers.push(t)
+    return () => { this.trackers = this.trackers.filter((x) => x !== t) }
+  }
+
+  updateTrackers() {
+    if (!this.trackers.length) return
+    const w = this.container.clientWidth
+    const h = this.container.clientHeight
+    const v = new THREE.Vector3()
+    for (const t of this.trackers) {
+      t.obj.getWorldPosition(v)
+      v.project(this.camera)
+      if (v.z > 1) {
+        t.el.style.visibility = 'hidden'
+        continue
+      }
+      t.el.style.visibility = ''
+      let x = (v.x * 0.5 + 0.5) * w
+      let y = (-v.y * 0.5 + 0.5) * h
+      if (t.clamp) {
+        // keep a box on screen: its width and height are measured, it hangs off the point on the given side
+        const bw = t.el.offsetWidth
+        const bh = t.el.offsetHeight
+        x = t.side < 0 ? x + 18 : x - bw - 18
+        y -= 30
+        x = Math.max(16, Math.min(w - bw - 16, x))
+        y = Math.max(78, Math.min(h - bh - 16, y))
+      }
+      t.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'
     }
   }
 
@@ -819,6 +976,7 @@ export class Cabin {
 
   /** Turn to a window seat and roll down the runway into the climb. */
   toWindow(snap = false, start = true) {
+    this.openBin(-1)
     const z = rowZ(1)
     this.camTarget.set(1.6, 0.56, z + 0.06)
     this.lookTarget.set(3.4, 0.32, z - 0.35)
@@ -896,6 +1054,15 @@ export class Cabin {
     const jolt = this.shake * 0.008 * Math.sin((1 - this.shake) * Math.PI * 2.2)
       + (this.rumble || 0) * 0.0007 * Math.sin(now / 160) * Math.sin(now / 410)
     this.camera.lookAt(this.look.x + sway, this.look.y + jolt, this.look.z)
+    // bin doors swing up (about 105 degrees) and settle, the lining brightens as they open
+    for (const b of this.bins) {
+      b.open += (b.target - b.open) * (1 - Math.pow(0.004, dt))
+      const e = b.open < 0.001 ? 0 : b.open
+      b.pivot.rotation.z = 1.83 * e
+      b.liner.emissiveIntensity = 0.9 * e
+    }
+    this.camera.updateMatrixWorld()
+    this.updateTrackers()
     this.composer.render()
   }
 
