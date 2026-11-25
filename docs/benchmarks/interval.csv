@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+interval,650,red-black interval tree,0.212,height 16,2000 conflict queries (all overlaps): O(log n + k) each
+interval,650,linear scan,1.96,,2000 conflict queries: O(n) each
+interval,6500,red-black interval tree,0.262,height 23,2000 conflict queries (all overlaps): O(log n + k) each
+interval,6500,linear scan,4.256,,2000 conflict queries: O(n) each
+interval,65000,red-black interval tree,0.366,height 29,2000 conflict queries (all overlaps): O(log n + k) each
+interval,65000,linear scan,41.311,,2000 conflict queries: O(n) each

@@ -1,0 +1,15 @@
+suite,n,method,median_ms,quality,note
+exact,6,branch and bound,0.027,cost 48, 80 nodes,exact optimum; exponential worst case
+exact,6,our heuristic,0.002,cost 48,O(n m); gap 0
+exact,6,brute force,0.006,cost 48, 185 nodes,every feasible assignment
+exact,8,branch and bound,0.028,cost 65, 1188 nodes,exact optimum; exponential worst case
+exact,8,our heuristic,0.003,cost 65,O(n m); gap 0
+exact,8,brute force,0.046,cost 65, 2931 nodes,every feasible assignment
+exact,10,branch and bound,0.707,cost 52, 40272 nodes,exact optimum; exponential worst case
+exact,10,our heuristic,0.005,cost 52,O(n m); gap 0
+exact,12,branch and bound,4.283,cost 73, 264988 nodes,exact optimum; exponential worst case
+exact,12,our heuristic,0.005,cost 73,O(n m); gap 0
+exact,14,branch and bound,62.445,cost 70, 3546883 nodes,exact optimum; exponential worst case
+exact,14,our heuristic,0.007,cost 70,O(n m); gap 0
+exact,16,branch and bound,3902.762,cost 93, 199136997 nodes,exact optimum; exponential worst case
+exact,16,our heuristic,0.006,cost 93,O(n m); gap 0

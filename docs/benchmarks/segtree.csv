@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+segtree,650,lazy segment tree,0.339,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,650,recount per minute,6.129,,recount every minute after each update: O(q n d)
+segtree,6500,lazy segment tree,1.047,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,6500,recount per minute,61.612,,recount every minute after each update: O(q n d)
+segtree,65000,lazy segment tree,9.192,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,65000,recount per minute,612.277,,recount every minute after each update: O(q n d)

@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+heap,650,Fibonacci heap,1.315,,650 inserts; 5200 decrease-keys; 650 extract-mins
+heap,650,binary heap,0.702,,same workload; O(log n) decrease-key
+heap,6500,Fibonacci heap,11.385,,6500 inserts; 52000 decrease-keys; 6500 extract-mins
+heap,6500,binary heap,5.729,,same workload; O(log n) decrease-key
+heap,65000,Fibonacci heap,102.743,,65000 inserts; 520000 decrease-keys; 65000 extract-mins
+heap,65000,binary heap,33.37,,same workload; O(log n) decrease-key

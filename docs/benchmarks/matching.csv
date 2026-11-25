@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+matching,65,maximum matching,0.605,56 placed,Edmonds-Karp: optimal count
+matching,65,greedy first-fit,0.01,49 placed,first free stand in list order
+matching,650,maximum matching,14.426,552 placed,Edmonds-Karp: optimal count
+matching,650,greedy first-fit,0.095,473 placed,first free stand in list order
+matching,6500,maximum matching,1818.025,5593 placed,Edmonds-Karp: optimal count
+matching,6500,greedy first-fit,0.534,4805 placed,first free stand in list order

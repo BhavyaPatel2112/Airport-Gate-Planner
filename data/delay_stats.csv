@@ -1,0 +1,10 @@
+airline_code,airline,departures,median_delay_min,p90_delay_min,on_time_pct,buffer_p75_min
+SG,SpiceJet,6,11.0,634.0,50.0,60
+BA,British Airways,6,26.0,323.0,0.0,48
+EK,Emirates,10,40.0,112.0,10.0,54
+QP,Akasa Air,64,28.0,94.0,17.2,47
+AI,Air India,214,35.0,91.0,17.8,60
+6E,IndiGo,360,29.0,85.0,25.8,54
+9I,Alliance Air,7,21.0,82.0,28.6,42
+EY,Etihad Airways,8,20.0,69.0,25.0,33
+IX,Air India Express,62,31.0,65.0,19.4,48

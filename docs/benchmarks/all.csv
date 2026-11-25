@@ -1,0 +1,66 @@
+suite,n,method,median_ms,quality,note
+sort,650,counting sort,0.084,,O(n + k); k = 1440
+sort,650,merge sort,0.101,,O(n log n)
+sort,6500,counting sort,0.431,,O(n + k); k = 1440
+sort,6500,merge sort,1.377,,O(n log n)
+sort,65000,counting sort,0.894,,O(n + k); k = 1440
+sort,65000,merge sort,6.611,,O(n log n)
+segtree,650,lazy segment tree,0.339,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,650,recount per minute,6.129,,recount every minute after each update: O(q n d)
+segtree,6500,lazy segment tree,1.047,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,6500,recount per minute,61.612,,recount every minute after each update: O(q n d)
+segtree,65000,lazy segment tree,9.192,,build + 200 delay updates; peak after each: O((n + q) log k)
+segtree,65000,recount per minute,612.277,,recount every minute after each update: O(q n d)
+interval,650,red-black interval tree,0.212,height 16,2000 conflict queries (all overlaps): O(log n + k) each
+interval,650,linear scan,1.96,,2000 conflict queries: O(n) each
+interval,6500,red-black interval tree,0.262,height 23,2000 conflict queries (all overlaps): O(log n + k) each
+interval,6500,linear scan,4.256,,2000 conflict queries: O(n) each
+interval,65000,red-black interval tree,0.366,height 29,2000 conflict queries (all overlaps): O(log n + k) each
+interval,65000,linear scan,41.311,,2000 conflict queries: O(n) each
+matching,65,maximum matching,0.605,56 placed,Edmonds-Karp: optimal count
+matching,65,greedy first-fit,0.01,49 placed,first free stand in list order
+matching,650,maximum matching,14.426,552 placed,Edmonds-Karp: optimal count
+matching,650,greedy first-fit,0.095,473 placed,first free stand in list order
+matching,6500,maximum matching,1818.025,5593 placed,Edmonds-Karp: optimal count
+matching,6500,greedy first-fit,0.534,4805 placed,first free stand in list order
+trie,650,trie prefix search,0.638,1823 nodes,500 searches; top 8: O(m + s) each
+trie,650,linear scan,2.074,,500 searches: O(n m) each
+trie,6500,trie prefix search,0.736,11857 nodes,500 searches; top 8: O(m + s) each
+trie,6500,linear scan,10.665,,500 searches: O(n m) each
+trie,65000,trie prefix search,0.641,57493 nodes,500 searches; top 8: O(m + s) each
+trie,65000,linear scan,105.132,,500 searches: O(n m) each
+heap,650,Fibonacci heap,1.315,,650 inserts; 5200 decrease-keys; 650 extract-mins
+heap,650,binary heap,0.702,,same workload; O(log n) decrease-key
+heap,6500,Fibonacci heap,11.385,,6500 inserts; 52000 decrease-keys; 6500 extract-mins
+heap,6500,binary heap,5.729,,same workload; O(log n) decrease-key
+heap,65000,Fibonacci heap,102.743,,65000 inserts; 520000 decrease-keys; 65000 extract-mins
+heap,65000,binary heap,33.37,,same workload; O(log n) decrease-key
+text,65,suffix tree,1.114,1384 chars,build once; then O(m + occ) per search
+text,65,KMP per search,1.647,,O(n + m) per search
+text,650,suffix tree,1.019,1384 chars,build once; then O(m + occ) per search
+text,650,KMP per search,1.652,,O(n + m) per search
+text,6500,suffix tree,3.827,1384 chars,build once; then O(m + occ) per search
+text,6500,KMP per search,16.495,,O(n + m) per search
+select,650,randomized Quickselect,0.074,p90 = 33.0,expected O(n)
+select,650,median-of-medians,0.232,p90 = 33.0,worst case O(n)
+select,650,full merge sort,0.346,p90 = 33.0,O(n log n)
+select,6500,randomized Quickselect,0.256,p90 = 31.0,expected O(n)
+select,6500,median-of-medians,0.261,p90 = 31.0,worst case O(n)
+select,6500,full merge sort,4.363,p90 = 31.0,O(n log n)
+select,65000,randomized Quickselect,1.01,p90 = 31.0,expected O(n)
+select,65000,median-of-medians,2.519,p90 = 31.0,worst case O(n)
+select,65000,full merge sort,8.034,p90 = 31.0,O(n log n)
+exact,6,branch and bound,0.027,cost 48, 80 nodes,exact optimum; exponential worst case
+exact,6,our heuristic,0.002,cost 48,O(n m); gap 0
+exact,6,brute force,0.006,cost 48, 185 nodes,every feasible assignment
+exact,8,branch and bound,0.028,cost 65, 1188 nodes,exact optimum; exponential worst case
+exact,8,our heuristic,0.003,cost 65,O(n m); gap 0
+exact,8,brute force,0.046,cost 65, 2931 nodes,every feasible assignment
+exact,10,branch and bound,0.707,cost 52, 40272 nodes,exact optimum; exponential worst case
+exact,10,our heuristic,0.005,cost 52,O(n m); gap 0
+exact,12,branch and bound,4.283,cost 73, 264988 nodes,exact optimum; exponential worst case
+exact,12,our heuristic,0.005,cost 73,O(n m); gap 0
+exact,14,branch and bound,62.445,cost 70, 3546883 nodes,exact optimum; exponential worst case
+exact,14,our heuristic,0.007,cost 70,O(n m); gap 0
+exact,16,branch and bound,3902.762,cost 93, 199136997 nodes,exact optimum; exponential worst case
+exact,16,our heuristic,0.006,cost 93,O(n m); gap 0

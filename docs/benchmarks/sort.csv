@@ -1,0 +1,7 @@
+suite,n,method,median_ms,quality,note
+sort,650,counting sort,0.084,,O(n + k); k = 1440
+sort,650,merge sort,0.101,,O(n log n)
+sort,6500,counting sort,0.431,,O(n + k); k = 1440
+sort,6500,merge sort,1.377,,O(n log n)
+sort,65000,counting sort,0.894,,O(n + k); k = 1440
+sort,65000,merge sort,6.611,,O(n log n)
