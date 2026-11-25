@@ -12,26 +12,30 @@ All planning runs in Java (Spring Boot). The React frontend only collects input 
 backend returns.
 
 Advanced Algorithm, Continuous Internal Assessment 3, Semester V, B.Tech CS AI and ML,
-ATLAS SkillTech University. Team: Bhavya Patel and Tanushree.
+ATLAS SkillTech University. Team: Bhavya Patel and Tanushree Bhatt.
 
-![Daytime overview](docs/screenshots/day-overview.png)
+Live demo: https://mumbai-gate-planner.azurewebsites.net
+
+![The airport with the Overview tab: 104 stands used, the proven minimum](docs/screenshots/overview.jpg)
 
 ## What it does
 
+The app is one screen: the 3D airport in the middle, a timeline dock at the bottom and a side panel
+with four tabs (Overview, Scenario lab, Algorithms, Flights). A short story flight introduces it.
+
 | Feature | What you see | Algorithm (unit) |
 |---|---|---|
-| 3D digital twin | A Three.js model of the airport built from the stand layout: terminals, jet bridges and aircraft that land, taxi, park and take off; cinematic camera moves, a clay model view, an analytics panel and a 2D map fallback | Display only; every position follows the stand and times from Java |
-| Live Mumbai Day | Real flights land, taxi, park, push back and take off on a replay clock (1x to 1440x) | Counting sort (U1), segment tree (U3) |
-| Smart Stand Assignment | Every flight on a compatible stand, fewest stands per class, with a proof badge | Interval partitioning on a Fibonacci heap (U2), segment tree lower bound (U3) |
-| Delay Shield | Delay or cancel any flight; clashes found instantly and re-planned | Red-black interval tree (U3), bipartite matching (U5) |
-| Unplaced flights | Every flight without a stand gets a plain-English reason | Minimum cut, Hall's theorem (U5) |
-| Stand Availability Radar | Next free stand per class, holding stack, decrease-key pulses | Fibonacci heap (U2) |
-| Notice Command Centre | Type or withdraw airport notices; preview the impact first | Suffix tree from suffix array and LCP (U4), KMP baseline |
-| Monsoon and Chaos Desk | Storm, rush hour, close stands, delay, cancel, replay real delays | Randomized Quickselect (U6, CO5), median-of-medians (U1) |
-| Flight finder | Autocomplete by flight, airline, city or registration | Trie (U4) |
-| The Race | Greedy first-fit against maximum matching on the same disruption | Edmonds-Karp (U5) |
-| Proof and Benchmark Lab | Every algorithm against its baseline at three sizes; exact versus smart | All, plus the NP-hardness study (U6) |
-| Machine view and X-ray | The data structure behind each move, animated from backend snapshots | All |
+| Story flight | A cabin where six overhead bins, one per syllabus unit, open to explain that unit; then a nonstop flight on a globe from New York to Mumbai | Display only |
+| Story arrival | A real flight (AI 116) lands during a storm twice: once with a fixed stand plan, once with the planner | Bipartite matching and min-cost flow (U5) |
+| 3D airport | A Three.js model built from the stand layout: terminals, jet bridges, aircraft that land, taxi, park and take off, ground vehicles and the city; camera views for the tower, whole airport, each terminal, the runway and the remote apron; layers for labels, closed stands and a stand use heat map | Display only; every position follows the stands and times from Java |
+| Live day | Real flights replayed on a clock (1, 5 or 15 minutes a second); the timeline shows how many stands are busy | Counting sort (U1), segment tree (U3) |
+| Overview tab | Stands used against the busiest moment, per stand class: the proof that no plan can use fewer | Interval partitioning on a Fibonacci heap (U2), segment tree lower bound (U3) |
+| Scenario lab | Five ready scenarios (Monsoon afternoon, Fog at dawn, Pier closed at the peak, Greedy trap, Perfect storm), your own scenario built from nine disruption types, or "Right now" to act at the current time; every moved aircraft is listed with its old and new stand | Red-black interval tree (U3), Edmonds-Karp matching, min-cost flow (U5), randomized Quickselect (U6), suffix tree for notices (U4) |
+| Holding stack | Flights left without a stand, each with a plain-English reason, and "Fix everything" to re-plan them | Minimum cut and Hall's theorem (U5), Fibonacci heap (U2) |
+| Flight card | Click any aircraft: a boarding pass with its stand, why it moved and why this stand; delay or cancel it from there | Red-black interval tree (U3), bipartite matching (U5) |
+| Algorithms tab | All six units with their live data structures (Fibonacci heap, red-black tree, matching, suffix tree, availability radar) and the time each took on this plan; the greedy against matching race and the benchmark lab | All, plus the NP-hardness study (U6) |
+| Flights tab | Search by flight, airline, city or registration; departures board | Trie (U4) |
+| Guide | A one-minute tour of the screen, reopened from the Guide button | None |
 
 ## Quick start
 
@@ -48,17 +52,18 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 and press **Start shift**. The demo runs entirely from the saved CSV
-files; no internet connection is needed.
+Open http://localhost:5173 and choose **Board the story flight** or **Go straight to the airport**.
+The demo runs entirely from the saved CSV files; no internet connection is needed.
 
-Useful URL options: `?start=1` skips the welcome screen, `?t=840` sets the clock (minutes after
-midnight), `?day=2` opens 17 November.
+Useful URL options: `?start=1` goes straight to the airport, `?start=story` opens the story flight,
+`?t=840` sets the clock (minutes after midnight), `?day=2` opens 17 November, `?guide=0` skips the
+tour.
 
 ### Run the tests and benchmarks
 
 ```bash
 cd backend
-./mvnw test                                   # 121 JUnit tests
+./mvnw test                                   # 132 JUnit tests
 ./mvnw -q compile exec:java -Dexec.mainClass=com.gateplanner.bench.BenchmarkRunner -Dexec.args="../docs/benchmarks"
 ```
 
@@ -99,8 +104,8 @@ stand list, notices and delay statistics is in [docs/benchmarks/README.md](docs/
 - Each visit is followed by a buffer equal to the airline's real departure delay at the chosen
   percentile, capped at 60 minutes. The default is the 75th percentile: departure times in the
   data are close to take-off, so they include taxi-out, and at the 90th percentile every airline
-  already exceeds the cap. The slider offers 50 to 99.
-- The plan is built on scheduled times; **Real delays** replays the actual times and recovers.
+  already exceeds the cap. The slider in the Scenario lab offers 50 to 99.
+- The plan is built on scheduled times; the **Replay the real day** disruption replays the actual times and recovers.
 
 ## How the planner works
 
@@ -118,13 +123,16 @@ stand list, notices and delay statistics is in [docs/benchmarks/README.md](docs/
 5. **Recover.** After a delay, cancellation, storm or closure, the interval trees find every visit
    that now overlaps another (the one that starts later moves). The moved visits are cut into
    conflict windows; in each window a bipartite graph of visits and free compatible stands is
-   solved by Edmonds-Karp. When visits stay unmatched, the minimum cut gives a set S of visits whose
-   usable stands N(S) are fewer than |S|: a proof by Hall's theorem, turned into a sentence.
+   solved by Edmonds-Karp, which finds how many visits can be placed. Min-cost flow (successive
+   shortest paths with Johnson potentials) then decides which: among the largest assignments it
+   picks the one that moves the fewest aircraft over the shortest tows. When visits stay unmatched,
+   the minimum cut gives a set S of visits whose usable stands N(S) are fewer than |S|: a proof by
+   Hall's theorem, turned into a sentence.
 6. **Notices.** On each replan the suffix tree over all notice text is searched for every stand id
    and taxiway id.
 
 **Honest limitation.** Matching is optimal inside each conflict window; across windows, and with
-preferences such as walking distance or airline piers, full gate assignment is NP-hard. The Lab
+preferences such as walking distance or airline piers, full gate assignment is NP-hard. The benchmark lab
 compares our method with an exact branch and bound on small inputs.
 
 ## Algorithms
@@ -139,6 +147,7 @@ compares our method with an exact branch and bound on small inputs.
 | `algo/trie/Trie` | 4 | O(m) per prefix | O(total key length) | Linear scan |
 | `algo/text/SuffixTree` (from `SuffixArray`, `LcpArray`) | 4 | O(n log n) build, O(m + occ) search | O(n) | `KmpMatcher`, O(n + m) per search |
 | `algo/matching/BipartiteMatcher`, `MaxFlowNetwork`, `MinCutExplainer` | 5 | O(min(L, R)(V + E)) | O(V + E) | `GreedyFirstFit` |
+| `algo/matching/MinCostMatcher` | 5 | O(F (E + V) log V) for a matching of size F | O(V + E) | Plain maximum matching |
 | `algo/select/RandomizedQuickselect` | 6 | Expected O(n) | O(n) | Full sort |
 | `algo/exact/ExactGateSolver` | 6 | Exponential (branch and bound) | O(n + m) | Brute force, our heuristic |
 
@@ -182,7 +191,10 @@ curl 'localhost:8080/api/notices/search?q=STAND%2064'
 | `POST /api/plan/{id}/delay`, `/cancel`, `/real-times` | Disruptions and real replay |
 | `GET /api/plan/{id}/why/{flight}`, `POST /api/plan/{id}/race` | Explanation, greedy versus matching |
 | `POST /api/plan/{id}/notices`, `DELETE /api/plan/{id}/notices/{nid}` | Validate, preview, apply or withdraw a notice |
-| `POST /api/plan/{id}/storm`, `/rush` | Monsoon storm, rush hour |
+| `POST /api/plan/{id}/storm`, `/rush`, `/ground-delay`, `/swap` | Storm, rush hour, fog ground delay, aircraft swap |
+| `POST /api/plan/{id}/replan` | Re-plan every visit from a given minute (maximum matching, then min-cost flow) |
+| `GET /api/story/arrival?day=1` | The story arrival: the same storm solved by a fixed plan and by the planner |
+| `GET /api/stands`, `GET /api/notices` | Stand list, notice list |
 | `GET /api/plan/{id}/radar`, `/board` | Availability radar, departures board |
 | `GET /api/stats/delays`, `GET /api/snapshots/{structure}` | Delay leaderboard, machine view snapshots |
 | `POST /api/bench/run`, `POST /api/exact` | Benchmarks, exact versus smart |
@@ -195,26 +207,25 @@ Errors use `{error, message, details}`: 400 for invalid input (for example a neg
 
 ```
 backend/   Spring Boot app: model, data import, algo (all assessed algorithms), engine, api, bench
-frontend/  React + Vite: scene3d (Three.js airport), scene (2D map), hud, machine views, panels
+frontend/  React + Vite: shell (one-screen layout and tabs), world (Three.js airport), story (welcome,
+           story flight), machine and panels (algorithm views), state, api
 data/      flights_day1.csv, flights_day2.csv, stands.csv, notices.txt, delay_stats.csv, raw/
 docs/      benchmarks (CSV and notes), screenshots
 ```
 
 ## Screenshots
 
-| Monsoon storm: reassignment arcs | Terminal 2 close up |
+| Welcome screen | Story flight: the Unit 3 bin open |
 |---|---|
-| ![Monsoon storm](docs/screenshots/storm.png) | ![Terminal 2](docs/screenshots/terminal2.png) |
+| ![Welcome screen](docs/screenshots/welcome.jpg) | ![Story flight cabin](docs/screenshots/cabin-bins.jpg) |
 
-| Clay model view | 2D map |
+| Scenario lab: Monsoon afternoon, 27 aircraft moved | Scenario lab: Greedy trap at night |
 |---|---|
-| ![Clay model](docs/screenshots/clay.png) | ![2D map](docs/screenshots/map2d.png) |
+| ![Monsoon afternoon scenario](docs/screenshots/storm.jpg) | ![Greedy trap scenario](docs/screenshots/greedy-trap.jpg) |
 
-| The race: greedy versus matching | Night operations |
+| Flight card: why it moved and why this stand | Algorithms tab: live Fibonacci heap |
 |---|---|
-| ![The race](docs/screenshots/race.png) | ![Night](docs/screenshots/night.png) |
-
-![Welcome screen](docs/screenshots/welcome.png)
+| ![Flight card](docs/screenshots/flight-card.jpg) | ![Algorithms tab](docs/screenshots/algorithms.jpg) |
 
 ## Contributions
 
