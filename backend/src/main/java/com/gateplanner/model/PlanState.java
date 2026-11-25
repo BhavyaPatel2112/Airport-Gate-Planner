@@ -40,6 +40,7 @@ public final class PlanState {
     private final List<String> warnings = new ArrayList<>();
     private int version;
     private Object certificate;
+    private boolean greedyRecovery;
     private final Map<String, Object> lastSnapshots = new HashMap<>();
 
     public PlanState(String id, int day, int bufferPercentile, List<Stand> stands, Collection<Turnaround> visits,
@@ -67,6 +68,13 @@ public final class PlanState {
     public Collection<Turnaround> getVisits() { return visits.values(); }
     public Turnaround visit(String visitId) { return visits.get(visitId); }
     public void addVisit(Turnaround t) { visits.put(t.getId(), t); }
+    /** Replaces a visit that has no stand with a new version of it (same id). */
+    public void replaceVisit(Turnaround t) {
+        if (standOf.containsKey(t.getId())) {
+            throw new IllegalStateException(t.getLabel() + " must leave its stand before it is replaced");
+        }
+        visits.put(t.getId(), t);
+    }
     public String standOf(String visitId) { return standOf.get(visitId); }
     public String originalStandOf(String visitId) { return originalStand.get(visitId); }
     public String reasonOf(String visitId) { return unplacedReason.get(visitId); }
@@ -81,6 +89,9 @@ public final class PlanState {
     public Object getCertificate() { return certificate; }
     public void setCertificate(Object c) { this.certificate = c; }
     public Map<String, Object> getLastSnapshots() { return lastSnapshots; }
+    /** True when disruptions on this plan are repaired with greedy first-fit instead of maximum matching. */
+    public boolean isGreedyRecovery() { return greedyRecovery; }
+    public void setGreedyRecovery(boolean greedy) { this.greedyRecovery = greedy; }
 
     /** Resolves a flight number (with or without the space) or a visit id to a visit. */
     public Turnaround findVisit(String flightOrVisit) {

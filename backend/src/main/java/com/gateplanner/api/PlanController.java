@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,8 @@ import java.util.Map;
 @RequestMapping("/api/plan")
 public class PlanController {
 
-    public record CreateRequest(@NotNull @Min(1) @Max(2) Integer day, @Min(50) @Max(99) Integer bufferPercentile) {
+    public record CreateRequest(@NotNull @Min(1) @Max(2) Integer day, @Min(50) @Max(99) Integer bufferPercentile,
+                                @Pattern(regexp = "(?i)matching|greedy", message = "must be matching or greedy") String recovery) {
     }
 
     public record DelayRequest(@NotBlank String flight, @NotNull Integer minutes, Integer atMinute) {
@@ -42,7 +44,11 @@ public class PlanController {
 
     @PostMapping
     public PlanView create(@Valid @RequestBody CreateRequest req) {
-        return PlanView.of(plans.create(req.day(), req.bufferPercentile() == null ? 75 : req.bufferPercentile()));
+        PlanService.Operation op = plans.create(req.day(), req.bufferPercentile() == null ? 75 : req.bufferPercentile());
+        if ("greedy".equalsIgnoreCase(req.recovery())) {
+            op.plan().setGreedyRecovery(true);
+        }
+        return PlanView.of(op);
     }
 
     @GetMapping("/{id}")

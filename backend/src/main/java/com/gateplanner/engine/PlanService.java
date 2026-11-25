@@ -123,6 +123,11 @@ public class PlanService {
         return p;
     }
 
+    /** Keeps a plan built elsewhere (a copy) so the browser can fetch it by id. */
+    public void register(PlanState plan) {
+        store(plan);
+    }
+
     private synchronized void store(PlanState plan) {
         plans.put(plan.getId(), plan);
         order.add(plan.getId());
@@ -434,12 +439,17 @@ public class PlanService {
 
     /** Copies a plan so the race can run two methods on the same disruption. */
     public PlanState copy(PlanState src) {
+        return copy(src, src.getId() + "-copy");
+    }
+
+    /** As {@link #copy(PlanState)}, under a new id. */
+    public PlanState copy(PlanState src, String id) {
         List<Turnaround> visits = new ArrayList<>();
         for (Turnaround t : src.getVisits()) {
             visits.add(t.copy());
         }
         AirportData.Day d = data.day(src.getDay());
-        PlanState p = new PlanState(src.getId() + "-copy", src.getDay(), src.getBufferPercentile(), src.getStands(),
+        PlanState p = new PlanState(id, src.getDay(), src.getBufferPercentile(), src.getStands(),
                 visits, d.flightIndex());
         p.getClosures().addAll(src.getClosures());
         p.getNotices().addAll(src.getNotices());

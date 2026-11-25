@@ -3,6 +3,7 @@ package com.gateplanner.engine;
 import com.gateplanner.algo.interval.RedBlackIntervalTree;
 import com.gateplanner.algo.matching.BipartiteMatcher;
 import com.gateplanner.algo.matching.GreedyFirstFit;
+import com.gateplanner.algo.matching.MinCostMatcher;
 import com.gateplanner.algo.matching.MinCutExplainer;
 import com.gateplanner.algo.sort.CountingSort;
 import com.gateplanner.model.Closure;
@@ -54,6 +55,15 @@ public final class RecoveryEngine {
                           Map<String, Object> matchingSnapshot) {
     }
 
+    /**
+     * What one conflict window looked like, kept only when a caller wants to explain the repair step by step.
+     * {@code options} holds, per visit, the stands that were open and empty for its whole visit (its edges).
+     */
+    public record WindowInfo(int index, List<String> visits, int firstStart, int sharedMinute, int stands, int edges,
+                             int augmentations, int matched, int greedyMatched, double ms,
+                             Map<String, List<String>> options, List<String> cutVisits, List<String> cutStands) {
+    }
+
     private static final int SNAPSHOT_LEFT = 24;
     private static final int SNAPSHOT_RIGHT = 36;
 
@@ -73,6 +83,7 @@ public final class RecoveryEngine {
                                   Collection<Turnaround> extra, boolean useMatching, TraceRecorder trace, String cause) {
         long t0 = System.nanoTime();
         Set<Turnaround> kicked = new LinkedHashSet<>();
+        Map<String, String> why = new HashMap<>();
         int queries = 0;
         int conflicts = 0;
         for (Turnaround v : changed) {
@@ -82,6 +93,8 @@ public final class RecoveryEngine {
             }
             if (!plan.openDuring(standId, v.getStart(), v.getOccupiedEnd())) {
                 kicked.add(v);
+                why.put(v.getId(), "Its new times (" + Clock.hhmm(v.getStart()) + " to " + Clock.hhmm(v.getOccupiedEnd())
+                        + ") run into a closure of stand " + standId);
                 continue;
             }
             List<RedBlackIntervalTree.Node<String>> hits = plan.tree(standId).overlaps(v.getStart(), v.getOccupiedEnd());
@@ -93,7 +106,13 @@ public final class RecoveryEngine {
                 }
                 conflicts++;
                 Turnaround loser = w.getStart() > v.getStart() ? w : v;
+                Turnaround keeper = loser == w ? v : w;
                 kicked.add(loser);
+                why.put(loser.getId(), loser == w
+                        ? "Delayed " + keeper.getLabel() + " is still on stand " + standId + " (with its safety gap until "
+                            + Clock.hhmm(keeper.getOccupiedEnd()) + ") when this flight needs it at " + Clock.hhmm(loser.getStart())
+                        : "After its delay it would overlap " + keeper.getLabel() + ", which is due on stand " + standId
+                            + " at " + Clock.hhmm(keeper.getStart()));
                 if (loser == v) {
                     break;
                 }
@@ -106,6 +125,8 @@ public final class RecoveryEngine {
             queries++;
             for (RedBlackIntervalTree.Node<String> h : plan.tree(c.standId()).overlaps(c.from(), c.to())) {
                 kicked.add(plan.visit(h.value()));
+                why.putIfAbsent(h.value(), "Stand " + c.standId() + " is closed from " + Clock.hhmm(c.from()) + " to "
+                        + Clock.hhmm(c.to()) + (c.reason() == null || c.reason().isBlank() ? "" : " (" + c.reason() + ")"));
             }
         }
         trace.add("Red-black interval tree", 3, "Find visits that now overlap (" + cause + ")", Math.max(1, queries),
@@ -128,7 +149,7 @@ public final class RecoveryEngine {
                 toPlace.add(t);
             }
         }
-        Outcome o = placeAll(plan, toPlace, useMatching, trace, cause, from);
+        Outcome o = placeAll(plan, toPlace, useMatching && !plan.isGreedyRecovery(), trace, cause, from, why);
         return new Outcome(o.events(), kicked.size(), o.placed(), o.unplaced(), o.windows(), o.matchingSnapshot());
     }
 
@@ -140,6 +161,22 @@ public final class RecoveryEngine {
 
     static Outcome placeAll(PlanState plan, List<Turnaround> visits, boolean useMatching, TraceRecorder trace,
                             String cause, Map<String, String> previousStand) {
+        return placeAll(plan, visits, useMatching, trace, cause, previousStand, Map.of());
+    }
+
+    /**
+     * As above; {@code why} holds, per visit id, the reason it had to leave its stand, which is
+     * joined with the reason for the new stand into the event text shown on the flight card.
+     */
+    static Outcome placeAll(PlanState plan, List<Turnaround> visits, boolean useMatching, TraceRecorder trace,
+                            String cause, Map<String, String> previousStand, Map<String, String> why) {
+        return placeAll(plan, visits, useMatching, trace, cause, previousStand, why, null);
+    }
+
+    /** As above; when {@code log} is not null, one {@link WindowInfo} per conflict window is added to it. */
+    static Outcome placeAll(PlanState plan, List<Turnaround> visits, boolean useMatching, TraceRecorder trace,
+                            String cause, Map<String, String> previousStand, Map<String, String> why,
+                            List<WindowInfo> log) {
         List<PlanEvent> events = new ArrayList<>();
         if (visits.isEmpty()) {
             return new Outcome(events, 0, 0, 0, 0, null);
@@ -165,10 +202,12 @@ public final class RecoveryEngine {
         int unplaced = 0;
         int edgesTotal = 0;
         int augment = 0;
+        int minCostRounds = 0;
         Map<String, Object> snapshot = null;
         int snapshotScore = -1;
         List<String> reasons = new ArrayList<>();
         for (List<Turnaround> w : windows) {
+            long tw = System.nanoTime();
             List<Stand> right = new ArrayList<>();
             Map<String, Integer> rightIndex = new LinkedHashMap<>();
             List<List<Integer>> adj = new ArrayList<>();
@@ -192,9 +231,25 @@ public final class RecoveryEngine {
             BipartiteMatcher matcher = null;
             if (useMatching) {
                 matcher = new BipartiteMatcher(w.size(), right.size(), adj);
-                matcher.solve();
+                int best = matcher.solve();
                 augment += matcher.augmentations();
                 match = matcher.matchLeft();
+                // among all matchings of that maximum size, take the one that moves the fewest aircraft and
+                // tows them the shortest distance (min-cost flow); Edmonds-Karp still supplies the size and the cut
+                List<List<Long>> cost = new ArrayList<>();
+                for (int i = 0; i < w.size(); i++) {
+                    String prev = previousStand.get(w.get(i).getId());
+                    List<Long> c = new ArrayList<>();
+                    for (int j : adj.get(i)) {
+                        c.add(moveCost(plan, prev, right.get(j)));
+                    }
+                    cost.add(c);
+                }
+                MinCostMatcher mc = new MinCostMatcher(w.size(), right.size(), adj, cost);
+                if (mc.solve() == best) {
+                    match = mc.matchLeft();
+                    minCostRounds += mc.rounds();
+                }
             } else {
                 match = GreedyFirstFit.match(w.size(), right.size(), adj);
             }
@@ -206,6 +261,9 @@ public final class RecoveryEngine {
             if (anyUnmatched && matcher != null) {
                 violator = MinCutExplainer.explain(matcher);
             }
+            if (log != null) {
+                log.add(windowInfo(log.size() + 1, w, right, adj, match, matcher, violator, useMatching, tw));
+            }
             for (int i = 0; i < w.size(); i++) {
                 Turnaround t = w.get(i);
                 String old = previousStand.get(t.getId());
@@ -214,8 +272,11 @@ public final class RecoveryEngine {
                     plan.place(t, standId);
                     placed++;
                     EventType type = old == null ? EventType.ASSIGN : old.equals(standId) ? EventType.STAY : EventType.MOVE;
-                    events.add(new PlanEvent(t.getId(), type, old, standId, t.getStart(),
-                            useMatching ? "Maximum matching" : "Greedy first-fit"));
+                    String text = useMatching ? "Maximum matching" : "Greedy first-fit";
+                    if (type != EventType.STAY) {
+                        text = moveReason(t, right.get(match[i]), right, adj.get(i), w.size(), useMatching, why.get(t.getId()));
+                    }
+                    events.add(new PlanEvent(t.getId(), type, old, standId, t.getStart(), text));
                 } else {
                     String reason = explain(plan, t, w, adj.get(i).isEmpty(), violator);
                     plan.markUnplaced(t, reason);
@@ -237,13 +298,104 @@ public final class RecoveryEngine {
                 useMatching ? "O(g (g + s + E)) per window" : "O(g + E) per window",
                 useMatching
                         ? placed + " placed, " + unplaced + " unplaced; " + augment + " augmenting paths. Inside each "
-                            + "window the matching is maximum (no augmenting path left)."
+                            + "window the matching is maximum (no augmenting path left); min-cost flow then chose, among "
+                            + "matchings of that size, the one with the fewest moves and shortest tows."
                         : placed + " placed, " + unplaced + " unplaced. First-fit can block a visit that had fewer options.");
         if (unplaced > 0 && useMatching) {
             trace.add("Minimum cut (Hall's theorem)", 5, "Explain unplaced visits", unplaced, 0,
                     "O(V + E) residual search", reasons.get(0));
         }
         return new Outcome(events, visits.size(), placed, unplaced, windows.size(), snapshot);
+    }
+
+    private static WindowInfo windowInfo(int index, List<Turnaround> w, List<Stand> right, List<List<Integer>> adj,
+                                         int[] match, BipartiteMatcher matcher, MinCutExplainer.HallViolator violator,
+                                         boolean useMatching, long t0) {
+        List<String> ids = new ArrayList<>();
+        Map<String, List<String>> options = new LinkedHashMap<>();
+        int edges = 0;
+        int matched = 0;
+        for (int i = 0; i < w.size(); i++) {
+            ids.add(w.get(i).getId());
+            List<String> opt = new ArrayList<>();
+            for (int j : adj.get(i)) {
+                opt.add(right.get(j).getId());
+            }
+            options.put(w.get(i).getId(), opt);
+            edges += opt.size();
+            matched += match[i] >= 0 ? 1 : 0;
+        }
+        int greedy = 0;
+        for (int m : GreedyFirstFit.match(w.size(), right.size(), adj)) {
+            greedy += m >= 0 ? 1 : 0;
+        }
+        List<String> cutVisits = new ArrayList<>();
+        List<String> cutStands = new ArrayList<>();
+        if (violator != null) {
+            for (int i : violator.flights()) {
+                cutVisits.add(w.get(i).getId());
+            }
+            for (int j : violator.stands()) {
+                cutStands.add(right.get(j).getId());
+            }
+        }
+        int shared = 0;
+        for (Turnaround t : w) {
+            shared = Math.max(shared, t.getStart());
+        }
+        return new WindowInfo(index, ids, w.get(0).getStart(), shared, right.size(), edges,
+                matcher == null ? 0 : matcher.augmentations(), matched, useMatching ? greedy : matched,
+                TraceRecorder.since(t0), options, cutVisits, cutStands);
+    }
+
+    /** Cost of putting a visit on a stand: staying is free, moving costs a lot plus the towing distance. */
+    static final long MOVE_COST = 100_000L;
+    static final long REMOTE_COST = 200L;
+
+    static long moveCost(PlanState plan, String previous, Stand s) {
+        long c = s.isContact() ? 0 : REMOTE_COST;
+        if (previous == null || previous.equals(s.getId())) {
+            return c;
+        }
+        Stand p = plan.stand(previous);
+        double d = p == null ? 0 : Math.hypot(p.getX() - s.getX(), p.getY() - s.getY());
+        return c + MOVE_COST + Math.round(d);
+    }
+
+    /** Straight-line towing distance between two stands, in metres. */
+    public static double towMetres(PlanState plan, String a, String b) {
+        Stand p = plan.stand(a);
+        Stand q = plan.stand(b);
+        return p == null || q == null ? 0 : Math.hypot(p.getX() - q.getX(), p.getY() - q.getY());
+    }
+
+    /** Plain English: why the visit had to move, and why it got this particular stand. */
+    static String moveReason(Turnaround t, Stand chosen, List<Stand> right, List<Integer> options, int windowSize,
+                             boolean useMatching, String leftBecause) {
+        String cls = StandClass.of(t).label();
+        String when = Clock.hhmm(t.getStart()) + " to " + Clock.hhmm(t.getOccupiedEnd());
+        boolean contactOption = false;
+        for (int k : options) {
+            contactOption |= right.get(k).isContact();
+        }
+        StringBuilder b = new StringBuilder();
+        if (leftBecause != null) {
+            b.append(leftBecause).append(". ");
+        }
+        b.append("Stand ").append(chosen.getId()).append(" can take a ").append(cls).append(" flight and is open and empty from ")
+                .append(when).append(" including the safety gap. ");
+        if (chosen.isContact()) {
+            b.append("It is a jet-bridge stand, preferred over remote stands. ");
+        } else if (contactOption) {
+            b.append("It is a remote stand: the free jet-bridge stands were needed by other flights in the same window. ");
+        } else {
+            b.append("It is a remote stand because no jet-bridge ").append(cls).append(" stand was free for that time. ");
+        }
+        b.append(options.size()).append(options.size() == 1 ? " stand was" : " stands were").append(" possible; ")
+                .append(useMatching
+                        ? "maximum matching re-placed all " + windowSize + " flights of this window together."
+                        : "greedy first-fit took the first free one in order.");
+        return b.toString();
     }
 
     /** Previous stand first, then contact stands, then remote stands, each in file order. */
