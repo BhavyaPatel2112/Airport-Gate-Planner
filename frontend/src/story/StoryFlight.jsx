@@ -18,6 +18,49 @@ function liveStat(app, match) {
   return t
 }
 
+/** A coloured light on the door of bin i; the cabin keeps it over the door as the camera moves. */
+function BinDot({ i, cabin, open, onOpen }) {
+  const ref = useRef(null)
+  useEffect(() => cabin.current && cabin.current.track(ref.current, cabin.current.bins[i].dot), [i, cabin])
+  return (
+    <div ref={ref} className={'bin-dot-at' + (open ? ' open' : '')}>
+      <button className="bin-dot" style={{ '--c': UNIT_COLOURS[i] }} onClick={() => onOpen(i)} aria-label={'Open the bin for unit ' + (i + 1)}>
+        <i />
+        <span className="bin-tip"><b>Unit {i + 1}</b>{UNITS[i].name}</span>
+      </button>
+    </div>
+  )
+}
+
+/** The text box that comes out of open bin i and stays beside it on screen. */
+function BinCard({ i, cabin, onClose }) {
+  const ref = useRef(null)
+  const side = cabin.current ? cabin.current.bins[i].side : -1
+  useEffect(() => {
+    const c = cabin.current
+    if (!c) return
+    return c.track(ref.current, c.bins[i].mouth, { clamp: true, side })
+  }, [i, cabin, side])
+  const s = STOPS[i]
+  return (
+    <div ref={ref} className="bin-anchor">
+      <motion.div className="bin-card" style={{ '--c': UNIT_COLOURS[i], transformOrigin: side < 0 ? '0% 10%' : '100% 10%' }}
+        initial={{ opacity: 0, scale: 0.25, x: side < 0 ? -40 : 40, y: -24 }} animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+        exit={{ opacity: 0, scale: 0.4, x: side < 0 ? -30 : 30, y: -20, transition: { duration: 0.22 } }}
+        transition={{ type: 'spring', damping: 20, stiffness: 190, delay: 0.45 }}>
+        <div className="bc-h">
+          <span className="sc-unit">Unit {s.unit}</span>
+          <button className="bc-x" onClick={onClose} aria-label="Close the bin"><Ico n="close" size={14} /></button>
+        </div>
+        <h3>{s.title}</h3>
+        <p className="bc-q">{s.question}</p>
+        <p className="bc-body">{s.body}</p>
+        <div className="sc-algos">{s.algos.map((a) => <span key={a}>{a}</span>)}</div>
+      </motion.div>
+    </div>
+  )
+}
+
 export default function StoryFlight({ onDone }) {
   const app = useApp()
   const cabinHost = useRef(null)
@@ -26,7 +69,8 @@ export default function StoryFlight({ onDone }) {
   const globe = useRef(null)
   const routes = useRef([])
   const [stage, setStage] = useState('cabin')
-  const [row, setRow] = useState(-1)
+  const [exploring, setExploring] = useState(false)
+  const [bin, setBin] = useState(-1)
   const [idx, setIdx] = useState(-1)
   const [flying, setFlying] = useState(false)
   // how many of the unit points along the route the plane has passed (the flight does not stop at them)
@@ -45,15 +89,25 @@ export default function StoryFlight({ onDone }) {
   const later = (fn, ms) => timers.current.push(setTimeout(fn, ms))
   useEffect(() => () => timers.current.forEach((t) => { clearTimeout(t); clearInterval(t) }), [])
 
-  const showRow = (r) => {
-    const n = row === r ? -1 : r
-    setRow(n)
-    cabin.current && cabin.current.focusRow(n)
+  // the intro card gives way to the cabin: six lights on the overhead bins, one per unit
+  const explore = () => setExploring(true)
+  const openBin = (i) => {
+    const n = bin === i ? -1 : i
+    setBin(n)
+    if (!cabin.current) return
+    cabin.current.openBin(n)
+    cabin.current.focusBin(n)
+  }
+  const backToIntro = () => {
+    openBin(-1)
+    setExploring(false)
   }
 
   // take-off: a quick blink, then straight to the window seat for the whole roll and climb
   const takeOff = () => {
     if (!cabin.current || stage !== 'cabin') return
+    setBin(-1)
+    setExploring(false)
     setFade('quick')
     later(() => {
       cabin.current.toWindow(true)
@@ -165,6 +219,15 @@ export default function StoryFlight({ onDone }) {
       <div className="story-gl" ref={globeHost} style={{ display: stage === 'globe' || stage === 'descent' ? 'block' : 'none' }} />
       <div className="story-shade" />
 
+      {stage === 'cabin' && exploring && (
+        <motion.div className="bin-layer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.4 }}>
+          {UNITS.map((u, i) => <BinDot key={u.u} i={i} cabin={cabin} open={bin === i} onOpen={openBin} />)}
+          <AnimatePresence>
+            {bin >= 0 && <BinCard key={bin} i={bin} cabin={cabin} onClose={() => openBin(bin)} />}
+          </AnimatePresence>
+        </motion.div>
+      )}
+
       <header className="story-top">
         <div className="brand">
           <span className="brand-mark"><Ico n="plane" size={15} fill /></span>
@@ -183,7 +246,7 @@ export default function StoryFlight({ onDone }) {
       </header>
 
       <AnimatePresence mode="wait">
-        {stage === 'cabin' && (
+        {stage === 'cabin' && !exploring && (
           <motion.section key="intro" className="story-card left glass" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5, delay: 0.3 }}>
             <div className="sc-eyebrow">Welcome aboard</div>
@@ -191,31 +254,19 @@ export default function StoryFlight({ onDone }) {
             <p className="lead">Mumbai airport has 136 parking stands. On the two days in our data it handled {DATA_FLIGHTS.day1} and {DATA_FLIGHTS.day2} flights. Each arriving aircraft needs a
               stand that fits its size and its terminal, for as long as it stays. This project plans all of them on real flights from
               16 and 17 November 2026, proves it uses the fewest stands, and repairs the plan when storms, closures or delays hit.</p>
-            <p className="lead dim">The first six rows carry the six units of the syllabus. The flight is nonstop to Mumbai; every couple of hours
-              along the way one unit comes up and shows where it works inside the planner.</p>
-            <div className="seat-list">
-              {UNITS.map((u, i) => (
-                <button key={u.u} className={'seat-btn' + (row === i ? ' on' : '')} style={{ '--c': UNIT_COLOURS[i] }}
-                  onClick={() => showRow(i)}>
-                  <i>{i + 1}</i><span>Unit {u.u}</span><b>{u.name}</b>
-                </button>
-              ))}
-            </div>
-            <AnimatePresence mode="wait">
-              {row >= 0 && (
-                <motion.div key={row} className="seat-detail" style={{ '--c': UNIT_COLOURS[row] }} initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.25 }}>
-                  <div className="sd-h"><b>Row {row + 1} · Unit {UNITS[row].u}</b><span>{STOPS[row].when}</span></div>
-                  <p>{STOPS[row].question} {STOPS[row].algos.join(', ')}.</p>
-                  <button className="link-btn" onClick={() => showRow(row)}>Back to the aisle</button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            {row < 0 && <p className="seat-hint">Click a unit to walk to its row.</p>}
             <div className="sc-actions">
-              <button className="btn primary big" onClick={takeOff}><Ico n="plane" size={16} fill />Take off</button>
+              <button className="btn primary big" onClick={explore}>Get to know more<Ico n="arrowRight" size={15} /></button>
             </div>
           </motion.section>
+        )}
+
+        {stage === 'cabin' && exploring && (
+          <motion.div key="bins-bar" className="bins-bar glass" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12, transition: { duration: 0.25 } }} transition={{ duration: 0.4, delay: 0.5 }}>
+            <button className="btn ghost" onClick={backToIntro}><Ico n="arrowLeft" size={14} />Back</button>
+            <span>Each coloured light on the overhead bins is one unit of the syllabus. Click one to open its bin.</span>
+            <button className="btn primary" onClick={takeOff}><Ico n="plane" size={14} fill />Take off</button>
+          </motion.div>
         )}
 
         {stage === 'globe' && stop && !flying && (
