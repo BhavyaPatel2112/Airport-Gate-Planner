@@ -242,6 +242,3 @@ shortest tows), the scenario engine and the step-by-step "Fix everything" replay
 (fixed stand plan against the planner), the 3D airport, the story flight, and the departures board,
 announcements, chaos desk, notice teletype, leaderboard, benchmark lab and the Fibonacci heap and
 suffix tree views.
-
-Tanushree's laptop stopped working during the project. With faculty approval, her part was
-developed on Bhavya's machine and pushed from her own account.
